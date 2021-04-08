@@ -1,0 +1,163 @@
+  /* Poppins font sourcing */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap');
+
+  /* Colour scheme
+  https://coolors.co/d8f3dc-298561-095d42-081c15-df5979 
+      #d8f3dc
+      #298561
+      #095D42
+      #081C15
+      #df5979
+   */
+
+  /* Sets San serif font for whole page. Serifs are Yuk */
+  /* Poppins is a cute rounded font that fits the frogs */
+  body {
+  font-family: 'Poppins' !important;
+  font-size: 17px; 
+  background-color: #D8F3DC;
+  color: #081C15;
+  }
+
+  /* Top of page */
+  /* Includes heading and buttons aka, everything that is static */
+
+
+  /* Sets the size and weight for the heading copy */
+  h1 {
+      font-size: 70px;
+      font-weight: 700;
+      margin-top: 0px;
+      color: #081C15;
+      font-family: 'Poppins';
+  }
+
+  /* Sets the size and weight for each card title */
+  h3 {
+      font-family: 'Poppins' !important;
+      font-weight: 700;
+      font-size: 20px; 
+  }
+
+  /* Sets the font size for the body text */
+  p {
+      font-size: 16px;
+  }
+
+  /* Sets custom letter spacing for the "frogs of" part of the heading  */
+  /* Done to line up with the "Australia" heading copy */
+  .heading1 h1{
+      letter-spacing: 4px;
+      display: inline;
+      font-family: 'Poppins';
+  }
+
+  /* The emphasis text, "of" in the heading */
+  /* Sets a different colour and slightly smaller size  */
+  .heading1 em{
+      font-size: 50px;
+      font-weight: 700;
+      color: #df5979;
+      font-family: 'Poppins';
+  }
+
+  /* Sets the "show frogs near me" button styling */
+  /* The button styling and text */
+  #findMe{
+      font-family: 'Poppins';
+      letter-spacing: 2px;
+      padding: 25px 55px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin: 15px 30px;
+      background-color: #298561;
+      border-radius: 7px;
+      color:#ffffff;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+      
+  }
+
+  /* Adds an hover effect to the button slightly darker green with 0.4s delay  */
+  #findMe:hover{
+      background-color: #095D42;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      transition: all 0.4s;
+  }
+
+  /* So the audio controls bar so that it doesnt go over the div card on smaller displays */
+  audio {
+      width: 100%;
+  }
+
+  /* Gives each card a more pronounced hover effect, changing colours and adding the mouse pointer */
+  .uk-card-default.uk-card-hover:hover {
+      background-color: #DFDFDF;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      transition: all 0.4s;
+      cursor: pointer;
+
+  }
+
+  /* Styles the footer to a green colour and   */
+  footer {
+  background-color: #D8F3DC;
+  padding: 50px;
+  text-align: center;
+  color: #081C15;
+  }
+
+
+
+
+  /* Custom Syles For Memory Game */
+
+  
+  #top{
+    text-align: center;
+    padding: 100px 0;
+    margin: 30vh;
+
+}
+
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+  
+  .memoryGame{
+    width: 100vh;
+    height: 85vh;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  
+.memory-card {
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  }
+  
+  .front-face,
+  .back-face {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+    border-radius: 5px;
+    background: #1C7CCC;
+  }
