@@ -1,9 +1,15 @@
 // Memory Flip Script
 
+shuffle();
+
 let hasFlippedCard = false;
+let lockBoard = false;
 let firstCard, secondCard;
 
 $('.memoryCard').on('click', function() {    
+    if (lockBoard) return;
+    if (this === firstCard) return;
+ 
     $(this).toggleClass('flip');   
 
     if (!hasFlippedCard) {
@@ -18,30 +24,56 @@ $('.memoryCard').on('click', function() {
         doCardsMatch();
 
     }
-
-
-    function doCardsMatch() {
-        // Do Cards Match
-        if (firstCard.dataset.framework === secondCard.dataset.framework) {
-            // Its a match
-            $(firstCard).unbind('click');
-            $(secondCard).unbind('click');
-            console.log("Cannot click", firstCard, secondCard);
-        } else {
-            // Not a match
-            setTimeout(() => {
-            $(firstCard).removeClass('flip');
-            $(secondCard).removeClass('flip');
-            }, 1000);
-        }
-    }
-    
-    function disableCards() {    
-    }
-
 });
 
+function doCardsMatch() {
+    // Do Cards Match
+    if (firstCard.dataset.framework === secondCard.dataset.framework) {
+        // Its a match
+        $(firstCard).unbind('click');
+        $(secondCard).unbind('click');
+        console.log("Cannot click", firstCard, secondCard);
+    } else {
+        // Not a match
+        lockBoard = true;
 
+        setTimeout(() => {
+            $(firstCard).removeClass('flip');
+            $(secondCard).removeClass('flip');
+
+            resetBoard();
+        }, 1000);
+    }
+}
+
+function resetBoard() {   
+    hasFlippedCard = false;
+    lockBoard = false;
+    firstCard = null;
+    secondCard = null;
+}
+
+
+
+function shuffle() {
+
+    for (var i = 0; i < 12; i++) {
+
+        let randomPos = Math.floor(Math.random() * 12);
+
+        $('.memoryCard').css("order", randomPos);
+        
+    }
+}
+
+// function shuffle() {
+//         $('.memoryCard').each(function() {
+//             let randomPos = Math.floor(Math.random() * 12);
+//             $('.memoryCard').css("order", randomPos);
+//             console.log(this + randomPos);
+
+//         });
+//     }
 
 
 
