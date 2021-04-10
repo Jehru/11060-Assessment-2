@@ -1,27 +1,45 @@
 // Memory Flip Script
 
-// Create a constant for all of the memory card items
-const cards = document.querySelectorAll('.memoryCard');
+let hasFlippedCard = false;
+let firstCard, secondCard;
+
+$('.memoryCard').on('click', function() {    
+    $(this).toggleClass('flip');   
+
+    if (!hasFlippedCard) {
+        // First Click
+        hasFlippedCard = true;
+        firstCard = this;
+    } else {
+        // Second click
+        hasFlippedCard = false;
+        secondCard = this;
+
+        doCardsMatch();
+
+    }
 
 
-function flipCard() {
-    console.log("I was Clicked!");
-    console.log(this);
+    function doCardsMatch() {
+        // Do Cards Match
+        if (firstCard.dataset.framework === secondCard.dataset.framework) {
+            // Its a match
+            $(firstCard).unbind('click');
+            $(secondCard).unbind('click');
+            console.log("Cannot click", firstCard, secondCard);
+        } else {
+            // Not a match
+            setTimeout(() => {
+            $(firstCard).removeClass('flip');
+            $(secondCard).removeClass('flip');
+            }, 1000);
+        }
+    }
+    
+    function disableCards() {    
+    }
 
-    // 14 mins 30 seconds
-    // Access class list of memeory card and toggle the flip class
-    // Toggle means if the class is there remove it, if not then add it
-    this.classList.toggle('flip');
-}
-
-
-
-// For Each Card listen for a click event
-// When that happens execute flipCard function
-cards.forEach(card => card.addEventListener('click', flipCard ));
-
-
-
+});
 
 
 

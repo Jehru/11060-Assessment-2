@@ -36,7 +36,7 @@ header {
 }
 
 h1 {
-    font-size: 70px;
+    font-size: 4.375rem;
     font-weight: 700;
 }
 
@@ -46,7 +46,7 @@ h1 {
 }
 
 .heading1 em{
-    font-size: 50px;
+    font-size: 3.125rem;
     font-weight: 700;
     color: #df5979;
     font-family: 'Poppins';
@@ -75,8 +75,8 @@ footer {
 /* **********  */
 
 .memoryGame {
-    width: 640px;
-    height: 640px;
+    width: 70vh;
+    height: 55vh;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
@@ -86,9 +86,9 @@ footer {
 }
 
 .memoryCard {
-    width: calc(25% - 10px);
-    height: calc(33.333% - 10px);
-    margin: 5px;
+    width: calc(25% - 5%);
+    height: calc(33.333% - 5%);
+    margin: 2.5%;
     position: relative;
     transform: scale(1);
 
@@ -115,6 +115,9 @@ footer {
     position: absolute;
     border-radius: 5px;
     background: lightgray;
-
+    backface-visibility: hidden;
 }
 
+.frontFace {
+    transform: rotateY(180deg);
+}
