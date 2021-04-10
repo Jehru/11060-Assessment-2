@@ -3,6 +3,34 @@
 
 $(document).ready(function() {
 
+    // Frog API
+    defaultUrl = "https://bie.ala.org.au/ws/search.json?q=frog&pageSize=6";
+    console.log("starting");
+    console.log(defaultUrl);    
+
+    $.getJSON(defaultUrl, function(data){
+        console.log(data.searchResults.results);
+    
+        const defaultFrog = data.searchResults.results;
+        console.log(defaultFrog);
+    
+        for(let i = 0; i < defaultFrog.length; i++) {
+        //                 $('#ifNoItems').append('<div><div class = "uk-card uk-card-default uk-card-body uk-card-hover"><h3>' + defaultFrog[i].name + '</h3  ><br>' + '<img src="' + defaultFrog[i].imageUrl 
+        //                     + '" alt = "Image of '+ defaultFrog[i].commonNameSingle +'"> <p class="hiddenText" style="display: none"> Common Name: '+ defaultFrog[i].commonNameSingle + '</p></div></div>' )
+            // console.log(this);
+
+            $('.memoryGame').append('<div class="memoryCard modal" data-framework=" ' + defaultFrog[i].id +
+             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
+            '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
+            
+            $('.memoryGame').append('<div class="memoryCard modal" data-framework=" ' + defaultFrog[i].id +
+             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
+            '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
+  
+
+            }
+        // })
+
     // Memory Flip Script
 
     shuffle();
@@ -40,6 +68,7 @@ $(document).ready(function() {
             $(firstCard).unbind('click');
             $(secondCard).unbind('click');
             console.log("Cannot click", firstCard, secondCard);
+
         } else {
             // Not a match
             lockBoard = true;
@@ -70,11 +99,17 @@ $(document).ready(function() {
             $(this).css("order", createRandom());
         })
 
+        // Had an issue where the number for each order item would be the same, this is because the random number applied 
+        // to the whole memoryCard items
+        // To solve this invoking a function each time solved the problem with a random number
         function createRandom() {
             var Num = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
             return Num;
         }  
     }
+
+    // These BRACKETS Need to be placed at the bottom, So much hassle because of these :(((())))
+})
 
 });
 
