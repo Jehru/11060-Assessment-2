@@ -1,4 +1,34 @@
+// Memory Flip Script
 
+// Create a constant for all of the memory card items
+const cards = document.querySelectorAll('.memoryCard');
+
+
+function flipCard() {
+    console.log("I was Clicked!");
+    console.log(this);
+
+    // 14 mins 30 seconds
+    // Access class list of memeory card and toggle the flip class
+    // Toggle means if the class is there remove it, if not then add it
+    this.classList.toggle('flip');
+}
+
+
+
+// For Each Card listen for a click event
+// When that happens execute flipCard function
+cards.forEach(card => card.addEventListener('click', flipCard ));
+
+
+
+
+
+
+
+
+
+// API Script
 
     // // When DOM and page is ready
     // $(document).ready(function() {
