@@ -44,6 +44,12 @@
       font-size: 16px;
   }
 
+
+  header{
+      text-align: center;
+      margin: 40vh 47vh 48vh;
+  }
+
   /* Sets custom letter spacing for the "frogs of" part of the heading  */
   /* Done to line up with the "Australia" heading copy */
   .heading1 h1{
@@ -61,22 +67,7 @@
       font-family: 'Poppins';
   }
 
-  /* Sets the "show frogs near me" button styling */
-  /* The button styling and text */
-  #findMe{
-      font-family: 'Poppins';
-      letter-spacing: 2px;
-      padding: 25px 55px;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin: 15px 30px;
-      background-color: #298561;
-      border-radius: 7px;
-      color:#ffffff;
-      font-weight: 600;
-      box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
-      
-  }
+
 
   /* Adds an hover effect to the button slightly darker green with 0.4s delay  */
   #findMe:hover{
@@ -103,25 +94,49 @@
 
   /* Styles the footer to a green colour and   */
   footer {
-  background-color: #D8F3DC;
+  background-color: #095D42;
   padding: 50px;
   text-align: center;
-  color: #081C15;
+  color: #ffffff;
   }
 
 
 
 
-  /* Custom Syles For Memory Game */
+
+
 
   
-  #top{
-    text-align: center;
-    padding: 100px 0;
-    margin: 30vh;
+/* ****************************** */
+  /* Custom Syles For Memory Game */
+/* *************************** */
 
+
+#top a{
+    color:#ffffff;
+    padding: 25px 55px;
+    text-decoration: none;
+    background-color: #298561;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+    cursor: pointer;
 }
 
+ /* Sets the "show frogs near me" button styling */
+  /* The button styling and text */
+  /* #findMe{
+    font-family: 'Poppins';
+    letter-spacing: 2px;
+    padding: 25px 0;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 15px 30px;
+    background-color: #298561;
+    border-radius: 7px;
+    color:#ffffff;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+    
+} */
 
 .container {
 	display: flex;
@@ -137,8 +152,8 @@
   
   .memoryGame{
     width: 100vh;
-    height: 85vh;
-    margin: auto;
+    height: 96vh;
+    margin: 5% auto;
     display: flex;
     flex-wrap: wrap;
   }
@@ -150,9 +165,10 @@
     margin: 5px;
     position: relative;
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    background-color:blueviolet;
   }
   
-  .front-face,
+  /* .front-face,
   .back-face {
     width: 100%;
     height: 100%;
@@ -160,4 +176,4 @@
     position: absolute;
     border-radius: 5px;
     background: #1C7CCC;
-  }
+  } */
