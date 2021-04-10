@@ -1,82 +1,82 @@
-// Memory Flip Script
 
-shuffle();
 
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard, secondCard;
 
-$('.memoryCard').on('click', function() {    
-    if (lockBoard) return;
-    if (this === firstCard) return;
- 
-    $(this).toggleClass('flip');   
+$(document).ready(function() {
 
-    if (!hasFlippedCard) {
-        // First Click
-        hasFlippedCard = true;
-        firstCard = this;
-    } else {
-        // Second click
+    // Memory Flip Script
+
+    shuffle();
+
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+
+    $('.memoryCard').on('click', function() {    
+        if (lockBoard) return;
+        if (this === firstCard) return;
+    
+        $(this).toggleClass('flip');   
+
+        if (!hasFlippedCard) {
+            // First Click
+            hasFlippedCard = true;
+            firstCard = this;
+        } else {
+            // Second click
+            hasFlippedCard = false;
+            secondCard = this;
+
+            doCardsMatch();
+
+        }
+    });
+
+    function doCardsMatch() {
+        // Do Cards Match
+        if (firstCard.dataset.framework === secondCard.dataset.framework) {
+            // Its a match
+
+            // https://stackoverflow.com/questions/209029/best-way-to-remove-an-event-handler-in-jquery
+            $(firstCard).unbind('click');
+            $(secondCard).unbind('click');
+            console.log("Cannot click", firstCard, secondCard);
+        } else {
+            // Not a match
+            lockBoard = true;
+
+            setTimeout(() => {
+                $(firstCard).removeClass('flip');
+                $(secondCard).removeClass('flip');
+
+                resetBoard();
+            }, 1000);
+        }
+    }
+
+    function resetBoard() {   
         hasFlippedCard = false;
-        secondCard = this;
-
-        doCardsMatch();
-
+        lockBoard = false;
+        firstCard = null;
+        secondCard = null;
     }
+
+
+    // Random Order 
+    // https://stackoverflow.com/questions/39581109/different-random-number-in-each-div
+
+    function shuffle() {
+
+        $(".memoryCard").each(function(){
+            $(this).css("order", createRandom());
+        })
+
+        function createRandom() {
+            var Num = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
+            return Num;
+        }  
+    }
+
 });
-
-function doCardsMatch() {
-    // Do Cards Match
-    if (firstCard.dataset.framework === secondCard.dataset.framework) {
-        // Its a match
-        $(firstCard).unbind('click');
-        $(secondCard).unbind('click');
-        console.log("Cannot click", firstCard, secondCard);
-    } else {
-        // Not a match
-        lockBoard = true;
-
-        setTimeout(() => {
-            $(firstCard).removeClass('flip');
-            $(secondCard).removeClass('flip');
-
-            resetBoard();
-        }, 1000);
-    }
-}
-
-function resetBoard() {   
-    hasFlippedCard = false;
-    lockBoard = false;
-    firstCard = null;
-    secondCard = null;
-}
-
-
-
-function shuffle() {
-
-    for (var i = 0; i < 12; i++) {
-
-        let randomPos = Math.floor(Math.random() * 12);
-
-        $('.memoryCard').css("order", randomPos);
-        
-    }
-}
-
-// function shuffle() {
-//         $('.memoryCard').each(function() {
-//             let randomPos = Math.floor(Math.random() * 12);
-//             $('.memoryCard').css("order", randomPos);
-//             console.log(this + randomPos);
-
-//         });
-//     }
-
-
-
 
 // API Script
 
