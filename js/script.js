@@ -5,6 +5,8 @@ $(document).ready(function() {
 
     // Frog API
     defaultUrl = "https://bie.ala.org.au/ws/search.json?q=frog&pageSize=6";
+    // defaultUrl = "//json/downloadJson.json";
+
     console.log("starting");
     console.log(defaultUrl);    
 
@@ -19,15 +21,14 @@ $(document).ready(function() {
         //                     + '" alt = "Image of '+ defaultFrog[i].commonNameSingle +'"> <p class="hiddenText" style="display: none"> Common Name: '+ defaultFrog[i].commonNameSingle + '</p></div></div>' )
             // console.log(this);
 
-            $('.memoryGame').append('<div class="memoryCard modal" data-framework=" ' + defaultFrog[i].id +
+            $('.memoryGame').append('<div class="memoryCard" data-framework=" ' + defaultFrog[i].id +
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
             
-            $('.memoryGame').append('<div class="memoryCard modal" data-framework=" ' + defaultFrog[i].id +
+            $('.memoryGame').append('<div class="memoryCard" data-framework=" ' + defaultFrog[i].id +
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
   
-
             }
         // })
 
@@ -59,6 +60,25 @@ $(document).ready(function() {
         }
     });
 
+
+    // Random Order 
+    // https://stackoverflow.com/questions/39581109/different-random-number-in-each-div
+
+    function shuffle() {
+
+        $(".memoryCard").each(function(){
+            $(this).css("order", createRandom());
+        })
+
+        // Had an issue where the number for each order item would be the same, this is because the random number applied 
+        // to the whole memoryCard items
+        // To solve this invoking a function each time solved the problem with a random number
+        function createRandom() {
+            var Num = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
+            return Num;
+        }  
+    }
+
     function doCardsMatch() {
         // Do Cards Match
         if (firstCard.dataset.framework === secondCard.dataset.framework) {
@@ -68,6 +88,18 @@ $(document).ready(function() {
             $(firstCard).unbind('click');
             $(secondCard).unbind('click');
             console.log("Cannot click", firstCard, secondCard);
+
+            // $("#dialog" ).dialog({
+            //     modal: true
+            // });
+
+            // let modalDialogue = '<div title="' + defaultFrog[i].id + '"><p>Put whatever you want in here</p></div>'; 
+
+            // console.log("here");
+            // console.log(defaultFrog);
+            
+            showModal();
+
 
         } else {
             // Not a match
@@ -89,27 +121,58 @@ $(document).ready(function() {
         secondCard = null;
     }
 
+    function showModal() {
 
-    // Random Order 
-    // https://stackoverflow.com/questions/39581109/different-random-number-in-each-div
+        // getFrogDataModal();
 
-    function shuffle() {
+        $.getJSON(defaultUrl, function(data){
+            const defaultFrog = data.searchResults.results;
 
-        $(".memoryCard").each(function(){
-            $(this).css("order", createRandom());
-        })
+            for(let i = 0; i < defaultFrog.length; i++) {
+                // console.log(defaultFrog[i].id);
+                let defaultFrogId = defaultFrog[i].id;
+                // console.log(defaultFrogId);
+                return defaultFrogId;
+            }
 
-        // Had an issue where the number for each order item would be the same, this is because the random number applied 
-        // to the whole memoryCard items
-        // To solve this invoking a function each time solved the problem with a random number
-        function createRandom() {
-            var Num = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
-            return Num;
-        }  
+            let frogMatchId = $('.memoryCard').data('framework');
+            console.log(frogMatchId);
+    
+    
+            if (frogMatchId === defaultFrogId) {
+                console.log("YES")
+            } else {
+                console.log("NO")
+            }
+        });
+
+
+        // https://stackoverflow.com/questions/2537581/can-anyone-tell-me-about-a-jquery-modal-dialog-box-library-that-doesnt-suck
+        $('<div title= "You found a frog "><img src=""> <p>The frogs scientific name is </p></div>').dialog({
+            autoOpen: true,
+            modal: true,
+            draggable: false,
+            resizable: false,
+            });    
+
     }
 
     // These BRACKETS Need to be placed at the bottom, So much hassle because of these :(((())))
+
 })
+
+
+    // function getFrogDataModal() {
+        
+    //     $.getJSON(defaultUrl, function(data){
+    //         const defaultFrog = data.searchResults.results;
+
+    //         for(let i = 0; i < defaultFrog.length; i++) {
+    //             console.log(defaultFrog[i]);
+    //         }
+    //         return defaultFrog;
+    //     });
+    // }
 
 });
 
