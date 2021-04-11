@@ -134,19 +134,35 @@ $(document).ready(function() {
                     // console.log(cardDataId);
                     console.log(defaultFrog[i]);
 
-                    $('<div title= " You Found a '+ defaultFrog[i].name +'"><img src="'+ defaultFrog[i].imageUrl + '"> <p>The frogs scientific name is '+ defaultFrog[i].name + '</p></div>').dialog({
-                        autoOpen: true,
-                        modal: true,
-                        draggable: false,
-                        // resizable: false,
-                        fluid: true,
-                        width: 800
-                        });
                     
-                    // $('.modaal-ajax').modaal({
-                    //     type: 'ajax'
-                    // });
-                        break;
+                    var modal = new tingle.modal({
+                        footer: false,
+                        stickyFooter: false,
+                        closeMethods: ['overlay', 'button', 'escape'],
+                        closeLabel: "Close",
+                        // cssClass: ['custom-class-1', 'custom-class-2'],
+                        onOpen: function() {
+                            console.log('modal open');
+                        },
+                        onClose: function() {
+                            console.log('modal closed');
+                        },
+                        beforeClose: function() {
+                            // here's goes some logic
+                            // e.g. save content before closing the modal
+                            return true; // close the modal
+                            return false; // nothing happens
+                        }
+                    });
+                    
+                    // set content
+                    modal.setContent('<div class ="row"> <div class="col"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                    ' <div class="col"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>The frogs are really cool</p> </div> </div>');
+                    
+                    // open modal
+                    modal.open();
+                              
+                    break;
                 } else {
 
                 }

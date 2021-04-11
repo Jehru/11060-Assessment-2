@@ -35,8 +35,14 @@ header {
     padding-top: 35vh;
 }
 
-h1 {
+header h1 {
     font-size: 4.375rem;
+    font-weight: 700;
+}
+
+/* For the Modal Popup */
+.col h1 {
+    /* font-size: 4.375rem; */
     font-weight: 700;
 }
 
