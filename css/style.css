@@ -41,7 +41,7 @@ header h1 {
 }
 
 /* For the Modal Popup */
-.col h1 {
+.col-4 h1 {
     /* font-size: 4.375rem; */
     font-weight: 700;
 }
@@ -126,4 +126,8 @@ footer {
 
 .frontFace {
     transform: rotateY(180deg);
+}
+
+.tingle-modal-box img{
+    width: 80%;
 }

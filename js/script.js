@@ -156,8 +156,8 @@ $(document).ready(function() {
                     });
                     
                     // set content
-                    modal.setContent('<div class ="row"> <div class="col"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
-                    ' <div class="col"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>The frogs are really cool</p> </div> </div>');
+                    modal.setContent('<div class ="row"> <div class="col-8"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                    ' <div class="col-4"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>The frogs are really cool</p> </div> </div>');
                     
                     // open modal
                     modal.open();
