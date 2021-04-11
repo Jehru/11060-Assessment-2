@@ -1,26 +1,16 @@
 
-
-
 $(document).ready(function() {
 
-    // Frog API
-    defaultUrl = "https://bie.ala.org.au/ws/search.json?q=frog&pageSize=6";
-    // defaultUrl = "//json/downloadJson.json";
+    console.log("Starting");
 
-    console.log("starting");
-    // console.log(defaultUrl);    
+    // Frog API
+    defaultUrl = "https://bie.ala.org.au/ws/search.json?q=frog&pageSize=6";    
 
     $.getJSON(defaultUrl, function(data){
-        // console.log(data.searchResults.results);
-    
+        
         const defaultFrog = data.searchResults.results;
-        // console.log(defaultFrog);
     
         for(let i = 0; i < defaultFrog.length; i++) {
-        //                 $('#ifNoItems').append('<div><div class = "uk-card uk-card-default uk-card-body uk-card-hover"><h3>' + defaultFrog[i].name + '</h3  ><br>' + '<img src="' + defaultFrog[i].imageUrl 
-        //                     + '" alt = "Image of '+ defaultFrog[i].commonNameSingle +'"> <p class="hiddenText" style="display: none"> Common Name: '+ defaultFrog[i].commonNameSingle + '</p></div></div>' )
-            // console.log(this);
-
             $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
@@ -29,191 +19,183 @@ $(document).ready(function() {
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
   
-            }
-        // })
-
-    // Memory Flip Script
-
-    shuffle();
-
-    let hasFlippedCard = false;
-    let lockBoard = false;
-    let firstCard, secondCard;
-
-    $('.memoryCard').on('click', function() {    
-        if (lockBoard) return;
-        if (this === firstCard) return;
-    
-        $(this).toggleClass('flip');   
-
-        if (!hasFlippedCard) {
-            // First Click
-            hasFlippedCard = true;
-            firstCard = this;
-        } else {
-            // Second click
-            hasFlippedCard = false;
-            secondCard = this;
-
-            doCardsMatch();
-
         }
-    });
 
+        // Memory Flip Script
+        shuffle();
 
-    // Random Order 
-    // https://stackoverflow.com/questions/39581109/different-random-number-in-each-div
+        let hasFlippedCard = false;
+        let lockBoard = false;
+        let firstCard, secondCard;
 
-    function shuffle() {
-
-        $(".memoryCard").each(function(){
-            $(this).css("order", createRandom());
-        })
-
-        // Had an issue where the number for each order item would be the same, this is because the random number applied 
-        // to the whole memoryCard items
-        // To solve this invoking a function each time solved the problem with a random number
-        function createRandom() {
-            var Num = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
-            return Num;
-        }  
-    }
-
-    function doCardsMatch() {
-        // Do Cards Match
-        if (firstCard.dataset.framework === secondCard.dataset.framework) {
-            // Its a match
-
-            // https://stackoverflow.com/questions/209029/best-way-to-remove-an-event-handler-in-jquery
-            $(firstCard).unbind('click');
-            $(secondCard).unbind('click');
-            console.log("Cannot click", firstCard, secondCard);
-            
-            showModal();
-
-
-        } else {
-            // Not a match
-            lockBoard = true;
-
-            setTimeout(() => {
-                $(firstCard).removeClass('flip');
-                $(secondCard).removeClass('flip');
-
-                resetBoard();
-            }, 1000);
-        }
-    }
-
-    function resetBoard() {   
-        hasFlippedCard = false;
-        lockBoard = false;
-        firstCard = null;
-        secondCard = null;
-    }
-
-    function showModal() {
-
-        // getFrogDataModal();
-
-        $.getJSON(defaultUrl, function(data){
-            const defaultFrog = data.searchResults.results;
-
-            for(let i = 0; i < defaultFrog.length; i++) {
-                // console.log(defaultFrog[i].image);
-                defaultFrogId = defaultFrog[i].id; 
-                // console.log("HEre");
-                // console.log(defaultFrogId);
-                // defaultFrogImageId = defaultFrog[i].imageUrl;
-
-                cardDataId = firstCard.dataset.framework;
-                // console.log(cardDataId);
-
-                if (cardDataId === defaultFrogId) {
-                    // console.log(defaultFrogImageId);
-                    // console.log(cardDataId);
-                    console.log(defaultFrog[i]);
-
-                    
-                    var modal = new tingle.modal({
-                        footer: false,
-                        stickyFooter: false,
-                        closeMethods: ['overlay', 'button', 'escape'],
-                        closeLabel: "Close",
-                        // cssClass: ['custom-class-1', 'custom-class-2'],
-                        onOpen: function() {
-                            console.log('modal open');
-                        },
-                        onClose: function() {
-                            console.log('modal closed');
-                        },
-                        beforeClose: function() {
-                            // here's goes some logic
-                            // e.g. save content before closing the modal
-                            return true; // close the modal
-                            return false; // nothing happens
-                        }
-                    });
-                    
-                    // set content
-                    modal.setContent('<div class ="row"> <div class="col-8"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
-                    ' <div class="col-4"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>The frogs are really cool</p> </div> </div>');
-                    
-                    // open modal
-                    modal.open();
-                              
-                    break;
-                } else {
-
-                }
-            
-            }
-
-
-            // cardDataId = firstCard.dataset.framework;
-            // console.log("Card ID");
-            // console.log(cardDataId);
-
-            // console.log("imageId");
-            // console.log(defaultFrogId);
-
-            // if (cardDataId === defaultFrogId) {
-            //     // console.log(defaultFrogImageId);
-            //     // console.log(cardDataId);
-            //     console.log(this);
-            // } 
-
-            // https://stackoverflow.com/questions/2537581/can-anyone-tell-me-about-a-jquery-modal-dialog-box-library-that-doesnt-suck
-            // $('<div title= "You found a frog "><img src=""> <p>The frogs scientific name is </p></div>').dialog({
-            // autoOpen: true,
-            // modal: true,
-            // draggable: false,
-            // resizable: false,
-            // }); 
-        }); 
-
-    }
-
-    // These BRACKETS Need to be placed at the bottom, So much hassle because of these :(((())))
-
-})
-
-
-    // function getFrogDataModal() {
+        $('.memoryCard').on('click', function() {    
+            if (lockBoard) return;
+            if (this === firstCard) return;
         
-    //     $.getJSON(defaultUrl, function(data){
-    //         const defaultFrog = data.searchResults.results;
+            $(this).toggleClass('flip');   
 
-    //         for(let i = 0; i < defaultFrog.length; i++) {
-    //             console.log(defaultFrog[i]);
-    //         }
-    //         return defaultFrog;
-    //     });
-    // }
+            if (!hasFlippedCard) {
+                // First Click
+                hasFlippedCard = true;
+                firstCard = this;
+            } else {
+                // Second click
+                hasFlippedCard = false;
+                secondCard = this;
 
+                doCardsMatch();
+
+            }
+        });
+
+
+        // Random Order 
+        // https://stackoverflow.com/questions/39581109/different-random-number-in-each-div
+
+        function shuffle() {
+
+            $(".memoryCard").each(function(){
+                $(this).css("order", createRandom());
+            })
+
+            // Had an issue where the number for each order item would be the same, this is because the random number applied 
+            // to the whole memoryCard items
+            // To solve this invoking a function each time solved the problem with a random number
+            function createRandom() {
+                var Num = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
+                return Num;
+            }  
+        }
+
+        function doCardsMatch() {
+            // Do Cards Match
+            if (firstCard.dataset.framework === secondCard.dataset.framework) {
+                // Its a match
+
+                // https://stackoverflow.com/questions/209029/best-way-to-remove-an-event-handler-in-jquery
+                $(firstCard).unbind('click');
+                $(secondCard).unbind('click');
+                console.log("Cannot click", firstCard, secondCard);
+                
+                showModal();
+
+
+            } else {
+                // Not a match
+                lockBoard = true;
+
+                setTimeout(() => {
+                    $(firstCard).removeClass('flip');
+                    $(secondCard).removeClass('flip');
+
+                    resetBoard();
+                }, 1000);
+            }
+        }
+
+        function resetBoard() {   
+            hasFlippedCard = false;
+            lockBoard = false;
+            firstCard = null;
+            secondCard = null;
+        }
+
+        function showModal() {
+
+            $.getJSON(defaultUrl, function(data){
+                const defaultFrog = data.searchResults.results;
+
+                for(let i = 0; i < defaultFrog.length; i++) {
+                    // console.log(defaultFrog[i].image);
+
+                    defaultFrogId = defaultFrog[i].id; 
+                    cardDataId = firstCard.dataset.framework;
+
+                    if (cardDataId === defaultFrogId) {
+                        // console.log(defaultFrog[i]);
+
+                        let idName = "";
+
+                        // Check if concept name exists 
+                        if (defaultFrog[i].acceptedConceptName == null) {
+                            idName = encodeURI(defaultFrog[i].scientificName);
+                        } else {
+                            idName = encodeURI(defaultFrog[i].acceptedConceptName);
+                        }
+                        console.log(idName);
+
+                        eolUrl = "https://eol.org/api/search/1.0.json?q=" + idName + "&page=1&key=";
+                        console.log(eolUrl);
+
+                        $.getJSON(eolUrl, function(eolData){
+                            console.log(eolData);
+                            
+                            let eolDataId = eolData.results[0].id;
+                            console.log(eolDataId);
+                
+                            let summaryUrl = "https://eol.org/api/pages/"+ eolDataId +"/brief_summary.json";
+                
+                            $.getJSON(summaryUrl, function(summaryData){
+                                console.log(summaryData);
+                                
+                                let summaryInfo = summaryData.brief_summary;
+                
+                                var modal = new tingle.modal({
+                                    footer: false,
+                                    stickyFooter: false,
+                                    closeMethods: ['overlay', 'button', 'escape'],
+                                    closeLabel: "Close",
+                                    // cssClass: ['custom-class-1', 'custom-class-2'],
+                                    onOpen: function() {
+                                        console.log('modal open');
+                                    },
+                                    onClose: function() {
+                                        console.log('modal closed');
+                                    },
+                                    beforeClose: function() {
+                                        // here's goes some logic
+                                        // e.g. save content before closing the modal
+                                        return true; // close the modal
+                                        return false; // nothing happens
+                                    }
+                                });
+                
+                                // set content
+                                modal.setContent('<div class ="row"> <div class="col-8"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                ' <div class="col-4"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                
+                                // open modal
+                                modal.open();
+                            });
+                                
+                        });
+                    }
+                }
+            });
+        } 
+
+
+    })
 });
 
-// API Script
+
+// Problems I had:
+/* 
+Memory Tutorial used Pure Javascript, I wanted to use jQuery (as i find it easier to write), so my code could be shorter and easier to read. 
+
+- Memory Game shuffle creating a random order when your appending each item at once
+- Unbinding the click class 
+- I had to append the items to the page compared to them already being there.
+- Finding an appropriate Modal I could use
+- Using bootstrap to better design the Modal popup left and right
+- Triggering the modal when two cards were selected
+
+- Making the Api read the selected cards and match it against all the API items
+
+*/
+    
+
+// OLD API Script
 
     // // When DOM and page is ready
     // $(document).ready(function() {
