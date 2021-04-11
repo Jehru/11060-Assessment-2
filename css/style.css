@@ -35,8 +35,14 @@ header {
     padding-top: 35vh;
 }
 
-h1 {
+header h1 {
     font-size: 4.375rem;
+    font-weight: 700;
+}
+
+/* For the Modal Popup */
+.col-4 h1 {
+    /* font-size: 4.375rem; */
     font-weight: 700;
 }
 
@@ -120,4 +126,29 @@ footer {
 
 .frontFace {
     transform: rotateY(180deg);
+}
+
+.tingle-modal-box img{
+    width: 80%;
+}
+
+#findMe {
+    text-decoration: none;
+    letter-spacing: 2px;
+    padding: 20px 55px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 15px 30px;
+    background-color: #298561;
+    border-radius: 7px;
+    color:#ffffff;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+}
+
+#findMe:hover{
+    background-color: #095D42;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
 }
