@@ -8,24 +8,24 @@ $(document).ready(function() {
     // defaultUrl = "//json/downloadJson.json";
 
     console.log("starting");
-    console.log(defaultUrl);    
+    // console.log(defaultUrl);    
 
     $.getJSON(defaultUrl, function(data){
-        console.log(data.searchResults.results);
+        // console.log(data.searchResults.results);
     
         const defaultFrog = data.searchResults.results;
-        console.log(defaultFrog);
+        // console.log(defaultFrog);
     
         for(let i = 0; i < defaultFrog.length; i++) {
         //                 $('#ifNoItems').append('<div><div class = "uk-card uk-card-default uk-card-body uk-card-hover"><h3>' + defaultFrog[i].name + '</h3  ><br>' + '<img src="' + defaultFrog[i].imageUrl 
         //                     + '" alt = "Image of '+ defaultFrog[i].commonNameSingle +'"> <p class="hiddenText" style="display: none"> Common Name: '+ defaultFrog[i].commonNameSingle + '</p></div></div>' )
             // console.log(this);
 
-            $('.memoryGame').append('<div class="memoryCard" data-framework=" ' + defaultFrog[i].id +
+            $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
             
-            $('.memoryGame').append('<div class="memoryCard" data-framework=" ' + defaultFrog[i].id +
+            $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
   
@@ -88,15 +88,6 @@ $(document).ready(function() {
             $(firstCard).unbind('click');
             $(secondCard).unbind('click');
             console.log("Cannot click", firstCard, secondCard);
-
-            // $("#dialog" ).dialog({
-            //     modal: true
-            // });
-
-            // let modalDialogue = '<div title="' + defaultFrog[i].id + '"><p>Put whatever you want in here</p></div>'; 
-
-            // console.log("here");
-            // console.log(defaultFrog);
             
             showModal();
 
@@ -129,31 +120,61 @@ $(document).ready(function() {
             const defaultFrog = data.searchResults.results;
 
             for(let i = 0; i < defaultFrog.length; i++) {
-                // console.log(defaultFrog[i].id);
-                let defaultFrogId = defaultFrog[i].id;
+                // console.log(defaultFrog[i].image);
+                defaultFrogId = defaultFrog[i].id; 
+                // console.log("HEre");
                 // console.log(defaultFrogId);
-                return defaultFrogId;
+                // defaultFrogImageId = defaultFrog[i].imageUrl;
+
+                cardDataId = firstCard.dataset.framework;
+                // console.log(cardDataId);
+
+                if (cardDataId === defaultFrogId) {
+                    // console.log(defaultFrogImageId);
+                    // console.log(cardDataId);
+                    console.log(defaultFrog[i]);
+
+                    $('<div title= " You Found a '+ defaultFrog[i].name +'"><img src="'+ defaultFrog[i].imageUrl + '"> <p>The frogs scientific name is '+ defaultFrog[i].name + '</p></div>').dialog({
+                        autoOpen: true,
+                        modal: true,
+                        draggable: false,
+                        // resizable: false,
+                        fluid: true,
+                        width: 800
+                        });
+                    
+                    // $('.modaal-ajax').modaal({
+                    //     type: 'ajax'
+                    // });
+                        break;
+                } else {
+
+                }
+            
             }
 
-            let frogMatchId = $('.memoryCard').data('framework');
-            console.log(frogMatchId);
-    
-    
-            if (frogMatchId === defaultFrogId) {
-                console.log("YES")
-            } else {
-                console.log("NO")
-            }
-        });
 
+            // cardDataId = firstCard.dataset.framework;
+            // console.log("Card ID");
+            // console.log(cardDataId);
 
-        // https://stackoverflow.com/questions/2537581/can-anyone-tell-me-about-a-jquery-modal-dialog-box-library-that-doesnt-suck
-        $('<div title= "You found a frog "><img src=""> <p>The frogs scientific name is </p></div>').dialog({
-            autoOpen: true,
-            modal: true,
-            draggable: false,
-            resizable: false,
-            });    
+            // console.log("imageId");
+            // console.log(defaultFrogId);
+
+            // if (cardDataId === defaultFrogId) {
+            //     // console.log(defaultFrogImageId);
+            //     // console.log(cardDataId);
+            //     console.log(this);
+            // } 
+
+            // https://stackoverflow.com/questions/2537581/can-anyone-tell-me-about-a-jquery-modal-dialog-box-library-that-doesnt-suck
+            // $('<div title= "You found a frog "><img src=""> <p>The frogs scientific name is </p></div>').dialog({
+            // autoOpen: true,
+            // modal: true,
+            // draggable: false,
+            // resizable: false,
+            // }); 
+        }); 
 
     }
 
