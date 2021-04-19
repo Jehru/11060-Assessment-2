@@ -1,8 +1,8 @@
-/* Styles for @@@ */
-/* By Jehru 30/04/01 */
+/* Styles for 11060 Interactive Project */
+/* By Jehru */
 
 /* Poppins font sourcing */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap");
 
 /* Colour scheme
 https://coolors.co/d8f3dc-298561-095d42-081c15-df5979 
@@ -18,44 +18,43 @@ https://coolors.co/d8f3dc-298561-095d42-081c15-df5979
 /* Main Styles */
 /* ******************** */
 
-
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 header {
-    height: 100vh;
-    background-color: #d8f3dc;
-    color: #081C15;
+  height: 100vh;
+  background-color: #d8f3dc;
+  color: #081c15;
 
-    text-align: center;
-    padding-top: 35vh;
+  text-align: center;
+  padding-top: 35vh;
 }
 
 header h1 {
-    font-size: 4.375rem;
-    font-weight: 700;
+  font-size: 4.375rem;
+  font-weight: 700;
 }
 
 /* For the Modal Popup */
 .col-4 h1 {
-    /* font-size: 4.375rem; */
-    font-weight: 700;
+  /* font-size: 4.375rem; */
+  font-weight: 700;
 }
 
 .heading1 h1 {
-    letter-spacing: 4px;
-    display:inline;
+  letter-spacing: 4px;
+  display: inline;
 }
 
-.heading1 em{
-    font-size: 3.125rem;
-    font-weight: 700;
-    color: #df5979;
-    font-family: 'Poppins';
+.heading1 em {
+  font-size: 3.125rem;
+  font-weight: 700;
+  color: #df5979;
+  font-family: "Poppins";
 }
 
 /* h3 {
@@ -64,16 +63,16 @@ header h1 {
 } */
 
 main {
-    height: 100vh;
-    display: flex;
-    background-color: #ffffff;
+  height: 100vh;
+  display: flex;
+  background-color: #ffffff;
 }
 
 footer {
-    background-color: #095D42;
-    padding: 50px;
-    text-align: center;
-    color: #ffffff;
+  background-color: #095d42;
+  padding: 50px;
+  text-align: center;
+  color: #ffffff;
 }
 
 /* **********  */
@@ -81,74 +80,176 @@ footer {
 /* **********  */
 
 .memoryGame {
-    width: 70vh;
-    height: 55vh;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
+  width: 90vh;
+  height: 70vh;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
 
-    /* Dont know if neccessary */
-    perspective: 1000px;
+  /* Dont know if neccessary */
+  perspective: 1000px;
 }
 
 .memoryCard {
-    width: calc(25% - 5%);
-    height: calc(33.333% - 5%);
-    margin: 2.5%;
-    position: relative;
-    transform: scale(1);
+  width: calc(25% - 5%);
+  height: calc(33.333% - 5%);
+  margin: 2.5%;
+  position: relative;
+  transform: scale(1);
 
-    /* Dont know if necc */
-    transform-style: preserve-3d;
-    transition: transform .5s;
+  /* Dont know if necc */
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
 }
 
-.memoryCard:active{
-    transform: scale(.97);
-    transition: transform 0.2s;
+.memoryCard:active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
 }
 
-.memoryCard.flip{
-    transform: rotateY(180deg);
+.memoryCard.flip {
+  transform: rotateY(180deg);
 }
-
 
 .frontFace,
 .backFace {
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    position: absolute;
-    border-radius: 5px;
-    background: lightgray;
-    backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: lightgray;
+  backface-visibility: hidden;
 }
 
 .frontFace {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-.tingle-modal-box img{
-    width: 80%;
+.tingle-modal-box img {
+  width: 80%;
 }
 
 #findMe {
-    text-decoration: none;
-    letter-spacing: 2px;
-    padding: 20px 55px;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin: 15px 30px;
-    background-color: #298561;
-    border-radius: 7px;
-    color:#ffffff;
-    font-weight: 600;
-    box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+  text-decoration: none;
+  letter-spacing: 2px;
+  padding: 20px 55px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 15px 30px;
+  background-color: #298561;
+  border-radius: 7px;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
 }
 
-#findMe:hover{
-    background-color: #095D42;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
+#findMe:hover {
+  background-color: #095d42;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
 }
+
+/* ------------------------------------ */
+/* MEDIA QUERIES */
+/* ------------------------------------ */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .heading1 h1 {
+    font-size: 3.375rem;
+  }
+
+  header h1 {
+    font-size: 3.375rem;
+  }
+
+  #findMe {
+    padding: 20px 35px;
+  }
+
+  .memoryGame {
+    width: 45vh;
+    height: 45vh;
+    margin: 20vh auto;
+  }
+
+  .memoryCard {
+    width: calc(33.333% - 5%);
+    height: calc(33.333% - 5%);
+    margin: 2.5%;
+  }
+
+  .col-4 {
+    width: 100% !important;
+  }
+
+  .col-8 {
+    width: 100% !important;
+  }
+
+  .col-8 img {
+    width: 100%;
+    margin: 0 auto 5% auto;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  .heading1 h1 {
+    font-size: 3.375rem;
+  }
+
+  header h1 {
+    font-size: 3.375rem;
+  }
+
+  #findMe {
+    padding: 20px 35px;
+  }
+
+  .memoryGame {
+    width: 45vh;
+    height: 45vh;
+    margin: 20vh auto;
+  }
+
+  .memoryCard {
+    width: calc(33.333% - 5%);
+    height: calc(33.333% - 5%);
+    margin: 2.5%;
+  }
+
+  .col-4 {
+    width: 100% !important;
+  }
+
+  .col-8 {
+    width: 100% !important;
+  }
+
+  .col-8 img {
+    width: 100%;
+    margin: 0 auto 5% auto;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .memoryGame {
+    width: 74vh;
+    height: 58vh;
+    margin: 15vh auto;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* Breakpoint */
+/* @media only screen and (min-width: 992px) {
+} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {
+
+} */
