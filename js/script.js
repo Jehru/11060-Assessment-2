@@ -9,7 +9,11 @@ $(document).ready(function() {
     $.getJSON(defaultUrl, function(data){
         
         const defaultFrog = data.searchResults.results;
-    
+
+        // Q mark source
+        // https://friconix.com/icon/fi-snsuxl-question-mark/ 
+        // https://api.jquery.com/data/ 
+
         for(let i = 0; i < defaultFrog.length; i++) {
             $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
@@ -73,8 +77,8 @@ $(document).ready(function() {
                 // Its a match
 
                 // https://stackoverflow.com/questions/209029/best-way-to-remove-an-event-handler-in-jquery
-                $(firstCard).unbind('click');
-                $(secondCard).unbind('click');
+                $(firstCard).off('click');
+                $(secondCard).off('click');
                 console.log("Cannot click", firstCard, secondCard);
                 
                 showModal();
@@ -117,6 +121,8 @@ $(document).ready(function() {
                         let idName = "";
 
                         // Check if concept name exists 
+                        // https://stackoverflow.com/questions/2647867/how-can-i-determine-if-a-variable-is-undefined-or-null
+                        // https://stackoverflow.com/questions/20792572/javascript-replace-all-20-with-a-space/20792627
                         if (defaultFrog[i].acceptedConceptName == null) {
                             idName = encodeURI(defaultFrog[i].scientificName);
                         } else {
@@ -160,6 +166,18 @@ $(document).ready(function() {
                                     }
                                 });
                 
+                                // Bootstrap Modal
+                                // https://stackoverflow.com/questions/13183630/how-to-open-a-bootstrap-modal-window-using-jquery
+                                // https://www.youtube.com/watch?v=RL6zSbM5gws 
+
+                                // jQuery Ui Dialog
+                                // https://api.jqueryui.com/dialog/#theming 
+                                // https://api.jqueryui.com/dialog/#option-resizable 
+
+
+
+
+
                                 // set content
                                 modal.setContent('<div class ="row"> <div class="col-8"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
                                 ' <div class="col-4"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
@@ -181,8 +199,6 @@ $(document).ready(function() {
 
 // Problems I had:
 /* 
-Memory Tutorial used Pure Javascript, I wanted to use jQuery (as i find it easier to write), so my code could be shorter and easier to read. 
-
 - Memory Game shuffle creating a random order when your appending each item at once
 - Unbinding the click class 
 - I had to append the items to the page compared to them already being there.
