@@ -34,6 +34,15 @@ header {
   padding-top: 35vh;
 }
 
+.secretHeader {
+  height: 100vh;
+  background-color: #61ece1;
+  color: #081c15;
+
+  text-align: center;
+  padding-top: 35vh;
+}
+
 header h1 {
   font-size: 4.375rem;
   font-weight: 700;

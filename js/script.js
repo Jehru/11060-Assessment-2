@@ -82,8 +82,6 @@ $(document).ready(function() {
                 console.log("Cannot click", firstCard, secondCard);
                 
                 showModal();
-
-                gameWon();
                 
             } else {
                 // Not a match
@@ -110,30 +108,33 @@ $(document).ready(function() {
         startTimer();
 
         // Game Timer
-        let second = 0, minute = 0; hour = 0;
-        let timer = document.querySelector(".timer");
+        // Hour not neccessary??
+        let second = 0; 
+        let minute = 0;
         var interval;
+        
         function startTimer(){
             interval = setInterval(function(){
-                timer.innerHTML = minute+" mins "+second+" secs";
+                $('.timer').html(minute +" mins "+ second +" secs");
                 second++;
                 if(second == 60){
                     minute++;
                     second=0;
                 }
-                if(minute == 60){
-                    hour++;
-                    minute = 0;
+                if (minute == 60) {
+
                 }
             },1000);
         }
         
         // Do all cards Match 
+        // https://stackoverflow.com/questions/47327136/check-if-all-children-of-div-have-class/47327281
         function gameWon(){
-            if($('.memoryGame .memoryCard.flip') === $('.memoryGame .memoryCard').length){
+            if($('.memoryGame .memoryCard.flip').length === $('.memoryGame .memoryCard').length){
                 //return true
             console.log('true');
-            console.log("the user has won the game")
+            console.log("the user has won the game");
+            location.replace("../level2.html");
             }
             else{
                 //return false
@@ -194,6 +195,8 @@ $(document).ready(function() {
                                     },
                                     onClose: function() {
                                         console.log('modal closed');
+                                        gameWon();
+
                                     },
                                     beforeClose: function() {
                                         // here's goes some logic
