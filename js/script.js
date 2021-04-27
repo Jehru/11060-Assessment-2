@@ -244,7 +244,7 @@ $(document).ready(function() {
 
                                         modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
                                         ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div> ' +
-                                        '<div class="row"><p>Frog Call</p><audio controls src="' + audioSource + '"></audio><div>');
+                                        '<div class="row"><audio controls src="' + audioSource + '"></audio><div>');
                                        
                                     } else {
                                         console.log("Does not have an linkIdentifier so no audio can be found");
