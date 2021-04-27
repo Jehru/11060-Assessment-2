@@ -48,6 +48,7 @@ $(document).ready(function() {
                 secondCard = this;
 
                 doCardsMatch();
+                
 
             }
         });
@@ -72,6 +73,8 @@ $(document).ready(function() {
         }
 
         function doCardsMatch() {
+            moveCounter();
+
             // Do Cards Match
             if (firstCard.dataset.framework === secondCard.dataset.framework) {
                 // Its a match
@@ -105,7 +108,19 @@ $(document).ready(function() {
             secondCard = null;
         }
         
-        startTimer();
+        // Move Counter
+        let moves = 0;
+
+        // Counts the Players moves
+        function moveCounter(){
+            moves++;
+            $('.moves').html(moves + " Move(s)");
+            if(moves == 1){
+                second = 0;
+                minute = 0; 
+                startTimer();
+            }
+        }
 
         // Game Timer
         // Hour not neccessary??

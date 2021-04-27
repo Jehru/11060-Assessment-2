@@ -95,7 +95,7 @@ footer {
 .memoryGame {
   width: 90vh;
   height: 70vh;
-  margin: auto;
+  margin: 10vh auto;
   display: flex;
   flex-wrap: wrap;
 
