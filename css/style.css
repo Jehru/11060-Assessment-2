@@ -75,11 +75,13 @@ main {
   height: 100vh;
   /* display: flex; */
   background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
 }
 
-flexBoard {
-  display: flex;
-}
+/* .mainContainer {
+  align-items: 
+} */
 
 footer {
   background-color: #095d42;
