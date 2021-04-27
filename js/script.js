@@ -9,6 +9,7 @@ $(document).ready(function() {
     $.getJSON(defaultUrl, function(data){
         
         const defaultFrog = data.searchResults.results;
+        console.log(defaultFrog);
 
         // Q mark source
         // https://friconix.com/icon/fi-snsuxl-question-mark/ 
@@ -165,9 +166,10 @@ $(document).ready(function() {
                 for(let i = 0; i < defaultFrog.length; i++) {
                     // console.log(defaultFrog[i].image);
 
-                    defaultFrogId = defaultFrog[i].id; 
-                    cardDataId = firstCard.dataset.framework;
+                    let defaultFrogId = defaultFrog[i].id; 
+                    let cardDataId = firstCard.dataset.framework;
 
+                    // Check which frog Id matches up with the various frogs on the board
                     if (cardDataId === defaultFrogId) {
                         // console.log(defaultFrog[i]);
 
@@ -176,21 +178,24 @@ $(document).ready(function() {
                         // Check if concept name exists 
                         // https://stackoverflow.com/questions/2647867/how-can-i-determine-if-a-variable-is-undefined-or-null
                         // https://stackoverflow.com/questions/20792572/javascript-replace-all-20-with-a-space/20792627
+
                         if (defaultFrog[i].acceptedConceptName == null) {
                             idName = encodeURI(defaultFrog[i].scientificName);
                         } else {
                             idName = encodeURI(defaultFrog[i].acceptedConceptName);
                         }
-                        console.log(idName);
 
                         eolUrl = "https://eol.org/api/search/1.0.json?q=" + idName + "&page=1&key=";
-                        console.log(eolUrl);
+                        // console.log(eolUrl);
+
+
+                  
 
                         $.getJSON(eolUrl, function(eolData){
                             console.log(eolData);
                             
                             let eolDataId = eolData.results[0].id;
-                            console.log(eolDataId);
+                            // console.log(eolDataId);
                 
                             let summaryUrl = "https://eol.org/api/pages/"+ eolDataId +"/brief_summary.json";
                 
@@ -229,22 +234,46 @@ $(document).ready(function() {
                                 // https://api.jqueryui.com/dialog/#theming 
                                 // https://api.jqueryui.com/dialog/#option-resizable 
 
-                                // set content
-                                modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
-                                ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                   // Checks if there is an audio File in the code
+                                    let someVariable = "";
+                                    let linkId = data.searchResults.results[i].linkIdentifier;
+
+                                    if (linkId !== null) {
+                                        console.log("Yes Has an link Identifier to use for an audio file");
+                                        let audioSource = "https://amphibiaweb.org/sounds/" + linkId + ".wav"; 
+
+                                        modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                        ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div> ' +
+                                        '<div class="row"><p>Frog Call</p><audio controls src="' + audioSource + '"></audio><div>');
+                                       
+                                    } else {
+                                        console.log("Does not have an linkIdentifier so no audio can be found");
+
+                                        modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                        ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                    }
+                                                                
                                 
-                                // open modal
+                                // Set content
+                                // modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                // ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                
+                                // Open modal
                                 modal.open();
                             });
                                 
                         });
+                    } else {
+
                     }
                 }
             });
         } 
 
+        //Ends here 
 
-    })
+
+    });
 });
 
 

@@ -52,6 +52,7 @@ header h1 {
 .col-6 h1 {
   /* font-size: 4.375rem; */
   font-weight: 700;
+  margin-bottom: 30px;
 }
 
 .heading1 h1 {
@@ -142,7 +143,7 @@ footer {
 }
 
 .tingle-modal-box img {
-  width: 80%;
+  width: 100%;
 }
 
 #findMe {
