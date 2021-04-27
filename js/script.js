@@ -9,14 +9,19 @@ $(document).ready(function() {
     $.getJSON(defaultUrl, function(data){
         
         const defaultFrog = data.searchResults.results;
-    
+        console.log(defaultFrog);
+
+        // Q mark source
+        // https://friconix.com/icon/fi-snsuxl-question-mark/ 
+        // https://api.jquery.com/data/ 
+
         for(let i = 0; i < defaultFrog.length; i++) {
             $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
-             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
+             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="Image of '+ defaultFrog[i].name + '">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
             
             $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
-             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
+             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="Image of '+ defaultFrog[i].name + '">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
   
         }
@@ -44,6 +49,7 @@ $(document).ready(function() {
                 secondCard = this;
 
                 doCardsMatch();
+                
 
             }
         });
@@ -68,18 +74,19 @@ $(document).ready(function() {
         }
 
         function doCardsMatch() {
+            moveCounter();
+
             // Do Cards Match
             if (firstCard.dataset.framework === secondCard.dataset.framework) {
                 // Its a match
 
                 // https://stackoverflow.com/questions/209029/best-way-to-remove-an-event-handler-in-jquery
-                $(firstCard).unbind('click');
-                $(secondCard).unbind('click');
+                $(firstCard).off('click');
+                $(secondCard).off('click');
                 console.log("Cannot click", firstCard, secondCard);
                 
                 showModal();
-
-
+                
             } else {
                 // Not a match
                 lockBoard = true;
@@ -93,12 +100,63 @@ $(document).ready(function() {
             }
         }
 
+        // Reset the board so no cards are flipped 
+        // Occurs when there is not a match in the cards
         function resetBoard() {   
             hasFlippedCard = false;
             lockBoard = false;
             firstCard = null;
             secondCard = null;
         }
+        
+        // Move Counter
+        let moves = 0;
+
+        // Counts the Players moves
+        function moveCounter(){
+            moves++;
+            $('.moves').html(moves + " Move(s)");
+            if(moves == 1){
+                second = 0;
+                minute = 0; 
+                startTimer();
+            }
+        }
+
+        // Game Timer
+        // Hour not neccessary??
+        let second = 0; 
+        let minute = 0;
+        var interval;
+        
+        function startTimer(){
+            interval = setInterval(function(){
+                $('.timer').html(minute +" mins "+ second +" secs");
+                second++;
+                if(second == 60){
+                    minute++;
+                    second=0;
+                }
+                if (minute == 60) {
+
+                }
+            },1000);
+        }
+        
+        // Do all cards Match 
+        // https://stackoverflow.com/questions/47327136/check-if-all-children-of-div-have-class/47327281
+        function gameWon(){
+            if($('.memoryGame .memoryCard.flip').length === $('.memoryGame .memoryCard').length){
+                //return true
+            console.log('true');
+            console.log("the user has won the game");
+            location.replace("../level2.html");
+            }
+            else{
+                //return false
+            console.log('false');
+            }
+        };
 
         function showModal() {
 
@@ -108,30 +166,36 @@ $(document).ready(function() {
                 for(let i = 0; i < defaultFrog.length; i++) {
                     // console.log(defaultFrog[i].image);
 
-                    defaultFrogId = defaultFrog[i].id; 
-                    cardDataId = firstCard.dataset.framework;
+                    let defaultFrogId = defaultFrog[i].id; 
+                    let cardDataId = firstCard.dataset.framework;
 
+                    // Check which frog Id matches up with the various frogs on the board
                     if (cardDataId === defaultFrogId) {
                         // console.log(defaultFrog[i]);
 
                         let idName = "";
 
                         // Check if concept name exists 
+                        // https://stackoverflow.com/questions/2647867/how-can-i-determine-if-a-variable-is-undefined-or-null
+                        // https://stackoverflow.com/questions/20792572/javascript-replace-all-20-with-a-space/20792627
+
                         if (defaultFrog[i].acceptedConceptName == null) {
                             idName = encodeURI(defaultFrog[i].scientificName);
                         } else {
                             idName = encodeURI(defaultFrog[i].acceptedConceptName);
                         }
-                        console.log(idName);
 
                         eolUrl = "https://eol.org/api/search/1.0.json?q=" + idName + "&page=1&key=";
-                        console.log(eolUrl);
+                        // console.log(eolUrl);
+
+
+                  
 
                         $.getJSON(eolUrl, function(eolData){
                             console.log(eolData);
                             
                             let eolDataId = eolData.results[0].id;
-                            console.log(eolDataId);
+                            // console.log(eolDataId);
                 
                             let summaryUrl = "https://eol.org/api/pages/"+ eolDataId +"/brief_summary.json";
                 
@@ -151,6 +215,8 @@ $(document).ready(function() {
                                     },
                                     onClose: function() {
                                         console.log('modal closed');
+                                        gameWon();
+
                                     },
                                     beforeClose: function() {
                                         // here's goes some logic
@@ -160,29 +226,59 @@ $(document).ready(function() {
                                     }
                                 });
                 
-                                // set content
-                                modal.setContent('<div class ="row"> <div class="col-8"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
-                                ' <div class="col-4"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                // Bootstrap Modal
+                                // https://stackoverflow.com/questions/13183630/how-to-open-a-bootstrap-modal-window-using-jquery
+                                // https://www.youtube.com/watch?v=RL6zSbM5gws 
+
+                                // jQuery Ui Dialog
+                                // https://api.jqueryui.com/dialog/#theming 
+                                // https://api.jqueryui.com/dialog/#option-resizable 
+
+                                   // Checks if there is an audio File in the code
+                                    let someVariable = "";
+                                    let linkId = data.searchResults.results[i].linkIdentifier;
+
+                                    if (linkId !== null) {
+                                        console.log("Yes Has an link Identifier to use for an audio file");
+                                        let audioSource = "https://amphibiaweb.org/sounds/" + linkId + ".wav"; 
+
+                                        modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                        ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div> ' +
+                                        '<div class="row"><p>Frog Call</p><audio controls src="' + audioSource + '"></audio><div>');
+                                       
+                                    } else {
+                                        console.log("Does not have an linkIdentifier so no audio can be found");
+
+                                        modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                        ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                    }
+                                                                
                                 
-                                // open modal
+                                // Set content
+                                // modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                // ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                
+                                // Open modal
                                 modal.open();
                             });
                                 
                         });
+                    } else {
+
                     }
                 }
             });
         } 
 
+        //Ends here 
 
-    })
+
+    });
 });
 
 
 // Problems I had:
 /* 
-Memory Tutorial used Pure Javascript, I wanted to use jQuery (as i find it easier to write), so my code could be shorter and easier to read. 
-
 - Memory Game shuffle creating a random order when your appending each item at once
 - Unbinding the click class 
 - I had to append the items to the page compared to them already being there.
