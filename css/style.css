@@ -40,7 +40,7 @@ header h1 {
 }
 
 /* For the Modal Popup */
-.col-4 h1 {
+.col-6 h1 {
   /* font-size: 4.375rem; */
   font-weight: 700;
 }
@@ -64,8 +64,12 @@ header h1 {
 
 main {
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   background-color: #ffffff;
+}
+
+flexBoard {
+  display: flex;
 }
 
 footer {
@@ -181,17 +185,22 @@ footer {
     margin: 2.5%;
   }
 
-  .col-4 {
+  .col-6 {
     width: 100% !important;
   }
 
-  .col-8 {
+  /* .col-8 {
     width: 100% !important;
-  }
+  } */
 
-  .col-8 img {
+  .col-6 img {
     width: 100%;
     margin: 0 auto 5% auto;
+  }
+
+  .frontFace,
+  .backFace {
+    padding: 0px;
   }
 }
 
@@ -232,6 +241,10 @@ footer {
   .col-8 img {
     width: 100%;
     margin: 0 auto 5% auto;
+  }
+  .frontFace,
+  .backFace {
+    padding: 8px;
   }
 }
 

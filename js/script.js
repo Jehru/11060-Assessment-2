@@ -16,11 +16,11 @@ $(document).ready(function() {
 
         for(let i = 0; i < defaultFrog.length; i++) {
             $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
-             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
+             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="Image of '+ defaultFrog[i].name + '">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
             
             $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
-             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="React">' +
+             '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="Image of '+ defaultFrog[i].name + '">' +
             '<img class="backFace" src="img/qmark.png" alt="Memory Card"> </div>')
   
         }
@@ -83,7 +83,8 @@ $(document).ready(function() {
                 
                 showModal();
 
-
+                gameWon();
+                
             } else {
                 // Not a match
                 lockBoard = true;
@@ -97,12 +98,48 @@ $(document).ready(function() {
             }
         }
 
+        // Reset the board so no cards are flipped 
+        // Occurs when there is not a match in the cards
         function resetBoard() {   
             hasFlippedCard = false;
             lockBoard = false;
             firstCard = null;
             secondCard = null;
         }
+        
+        startTimer();
+
+        // Game Timer
+        let second = 0, minute = 0; hour = 0;
+        let timer = document.querySelector(".timer");
+        var interval;
+        function startTimer(){
+            interval = setInterval(function(){
+                timer.innerHTML = minute+" mins "+second+" secs";
+                second++;
+                if(second == 60){
+                    minute++;
+                    second=0;
+                }
+                if(minute == 60){
+                    hour++;
+                    minute = 0;
+                }
+            },1000);
+        }
+        
+        // Do all cards Match 
+        function gameWon(){
+            if($('.memoryGame .memoryCard.flip') === $('.memoryGame .memoryCard').length){
+                //return true
+            console.log('true');
+            console.log("the user has won the game")
+            }
+            else{
+                //return false
+            console.log('false');
+            }
+        };
 
         function showModal() {
 
@@ -174,13 +211,9 @@ $(document).ready(function() {
                                 // https://api.jqueryui.com/dialog/#theming 
                                 // https://api.jqueryui.com/dialog/#option-resizable 
 
-
-
-
-
                                 // set content
-                                modal.setContent('<div class ="row"> <div class="col-8"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
-                                ' <div class="col-4"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
+                                ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
                                 
                                 // open modal
                                 modal.open();
