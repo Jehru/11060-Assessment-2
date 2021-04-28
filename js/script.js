@@ -142,15 +142,40 @@ $(document).ready(function() {
                 }
             },1000);
         }
+
+        var modal = new tingle.modal({
+            footer: false,
+            stickyFooter: false,
+            closeMethods: ['overlay', 'button', 'escape'],
+            closeLabel: "Close",
+            // cssClass: ['custom-class-1', 'custom-class-2'],
+            onOpen: function() {
+                console.log('modal open');
+            },
+            onClose: function() {
+                console.log('modal closed');
+                checkIfGameWon();
+            },
+            beforeClose: function() {
+                // here's goes some logic
+                // e.g. save content before closing the modal
+                return true; // close the modal
+                return false; // nothing happens
+            }
+        });
         
         // Do all cards Match 
         // https://stackoverflow.com/questions/47327136/check-if-all-children-of-div-have-class/47327281
-        function gameWon(){
+        function checkIfGameWon(){
+
             if($('.memoryGame .memoryCard.flip').length === $('.memoryGame .memoryCard').length){
-                //return true
-            console.log('true');
-            console.log("the user has won the game");
-            location.replace("../level2.html");
+            
+            // Returns true if  
+            console.log("The user has won the game");
+            // location.replace("../level2.html");
+
+            window.alert("You hav won the game");
+
             }
             else{
                 //return false
@@ -204,27 +229,27 @@ $(document).ready(function() {
                                 
                                 let summaryInfo = summaryData.brief_summary;
                 
-                                var modal = new tingle.modal({
-                                    footer: false,
-                                    stickyFooter: false,
-                                    closeMethods: ['overlay', 'button', 'escape'],
-                                    closeLabel: "Close",
-                                    // cssClass: ['custom-class-1', 'custom-class-2'],
-                                    onOpen: function() {
-                                        console.log('modal open');
-                                    },
-                                    onClose: function() {
-                                        console.log('modal closed');
-                                        gameWon();
+                                // var modal = new tingle.modal({
+                                //     footer: false,
+                                //     stickyFooter: false,
+                                //     closeMethods: ['overlay', 'button', 'escape'],
+                                //     closeLabel: "Close",
+                                //     // cssClass: ['custom-class-1', 'custom-class-2'],
+                                //     onOpen: function() {
+                                //         console.log('modal open');
+                                //     },
+                                //     onClose: function() {
+                                //         console.log('modal closed');
+                                //         gameWon();
 
-                                    },
-                                    beforeClose: function() {
-                                        // here's goes some logic
-                                        // e.g. save content before closing the modal
-                                        return true; // close the modal
-                                        return false; // nothing happens
-                                    }
-                                });
+                                //     },
+                                //     beforeClose: function() {
+                                //         // here's goes some logic
+                                //         // e.g. save content before closing the modal
+                                //         return true; // close the modal
+                                //         return false; // nothing happens
+                                //     }
+                                // });
                 
                                 // Bootstrap Modal
                                 // https://stackoverflow.com/questions/13183630/how-to-open-a-bootstrap-modal-window-using-jquery
