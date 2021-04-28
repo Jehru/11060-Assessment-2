@@ -164,6 +164,15 @@ $(document).ready(function() {
             }
         });
         
+        // Bootstrap Modal
+        // https://stackoverflow.com/questions/13183630/how-to-open-a-bootstrap-modal-window-using-jquery
+        // https://www.youtube.com/watch?v=RL6zSbM5gws 
+
+        // jQuery Ui Dialog
+        // https://api.jqueryui.com/dialog/#theming 
+        // https://api.jqueryui.com/dialog/#option-resizable 
+
+
         // Do all cards Match 
         // https://stackoverflow.com/questions/47327136/check-if-all-children-of-div-have-class/47327281
         function checkIfGameWon(){
@@ -174,12 +183,12 @@ $(document).ready(function() {
             console.log("The user has won the game");
             // location.replace("../level2.html");
 
-            window.alert("You hav won the game");
+            window.alert("You have won the game");
 
             }
-            else{
+            else {
                 //return false
-            console.log('false');
+                console.log('false');
             }
         };
 
@@ -213,9 +222,6 @@ $(document).ready(function() {
                         eolUrl = "https://eol.org/api/search/1.0.json?q=" + idName + "&page=1&key=";
                         // console.log(eolUrl);
 
-
-                  
-
                         $.getJSON(eolUrl, function(eolData){
                             console.log(eolData);
                             
@@ -228,37 +234,7 @@ $(document).ready(function() {
                                 console.log(summaryData);
                                 
                                 let summaryInfo = summaryData.brief_summary;
-                
-                                // var modal = new tingle.modal({
-                                //     footer: false,
-                                //     stickyFooter: false,
-                                //     closeMethods: ['overlay', 'button', 'escape'],
-                                //     closeLabel: "Close",
-                                //     // cssClass: ['custom-class-1', 'custom-class-2'],
-                                //     onOpen: function() {
-                                //         console.log('modal open');
-                                //     },
-                                //     onClose: function() {
-                                //         console.log('modal closed');
-                                //         gameWon();
-
-                                //     },
-                                //     beforeClose: function() {
-                                //         // here's goes some logic
-                                //         // e.g. save content before closing the modal
-                                //         return true; // close the modal
-                                //         return false; // nothing happens
-                                //     }
-                                // });
-                
-                                // Bootstrap Modal
-                                // https://stackoverflow.com/questions/13183630/how-to-open-a-bootstrap-modal-window-using-jquery
-                                // https://www.youtube.com/watch?v=RL6zSbM5gws 
-
-                                // jQuery Ui Dialog
-                                // https://api.jqueryui.com/dialog/#theming 
-                                // https://api.jqueryui.com/dialog/#option-resizable 
-
+            
                                    // Checks if there is an audio File in the code
                                     let someVariable = "";
                                     let linkId = data.searchResults.results[i].linkIdentifier;
