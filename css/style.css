@@ -167,6 +167,14 @@ footer {
   transition: all 0.4s;
 }
 
+.row audio {
+  margin-top: 5%;
+}
+
+.controls {
+  align-items: center;
+}
+
 /* ------------------------------------ */
 /* MEDIA QUERIES */
 /* ------------------------------------ */
@@ -242,13 +250,13 @@ footer {
     margin: 2.5%;
   }
 
-  .col-4 {
+  /* .col-4 {
     width: 100% !important;
   }
 
   .col-8 {
     width: 100% !important;
-  }
+  } */
 
   .col-8 img {
     width: 100%;
@@ -270,11 +278,17 @@ footer {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-/* Breakpoint */
-/* @media only screen and (min-width: 992px) {
-} */
-
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-/* @media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1440px) {
+  .col-6 h1 {
+    font-size: 5rem;
+  }
 
-} */
+  p {
+    font-size: 3rem;
+  }
+
+  section {
+    font-size: 3rem;
+  }
+}
