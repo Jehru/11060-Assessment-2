@@ -34,14 +34,19 @@ header {
   padding-top: 35vh;
 }
 
-.secretHeader {
+/* Scroll Lock */
+.hidden {
+  overflow: hidden;
+}
+
+/* .secretHeader {
   height: 100vh;
   background-color: #61ece1;
   color: #081c15;
 
   text-align: center;
   padding-top: 35vh;
-}
+} */
 
 header h1 {
   font-size: 4.375rem;
@@ -98,7 +103,7 @@ footer {
 .memoryGame {
   width: 90vh;
   height: 70vh;
-  margin: 10vh auto;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
 
@@ -146,7 +151,7 @@ footer {
   width: 100%;
 }
 
-#findMe {
+#playGame {
   text-decoration: none;
   letter-spacing: 2px;
   padding: 20px 55px;
@@ -158,9 +163,10 @@ footer {
   color: #ffffff;
   font-weight: 600;
   box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+  display: inline-block;
 }
 
-#findMe:hover {
+#playGame:hover {
   background-color: #095d42;
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -172,7 +178,9 @@ footer {
 }
 
 .controls {
-  align-items: center;
+  /* align-items: center; */
+  margin-top: 10vh;
+  text-align: center;
 }
 
 /* ------------------------------------ */
@@ -189,8 +197,9 @@ footer {
     font-size: 3.375rem;
   }
 
-  #findMe {
+  #playGame {
     padding: 20px 35px;
+    margin: 0px;
   }
 
   .memoryGame {
@@ -222,6 +231,10 @@ footer {
   .backFace {
     padding: 0px;
   }
+
+  .scrollClass {
+    overflow: scroll;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -234,7 +247,7 @@ footer {
     font-size: 3.375rem;
   }
 
-  #findMe {
+  #playGame {
     padding: 20px 35px;
   }
 
@@ -250,14 +263,6 @@ footer {
     margin: 2.5%;
   }
 
-  /* .col-4 {
-    width: 100% !important;
-  }
-
-  .col-8 {
-    width: 100% !important;
-  } */
-
   .col-8 img {
     width: 100%;
     margin: 0 auto 5% auto;
@@ -271,15 +276,47 @@ footer {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .memoryGame {
+    /* CHECK THESE VALUES */
     width: 74vh;
+    /* width: 64vh; */
     height: 58vh;
-    margin: 15vh auto;
+    /* height: 51vh; */
+    margin: auto;
+  }
+  p {
+    font-size: 1rem;
+  }
+
+  section {
+    font-size: 1rem;
   }
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
+/* Medium devices (landscape tablets, 993px and 1200px) */
+/* @media only screen and (min-width: 993px) and (max-width: 1200px) {
+} */
+
+/* Large devices (laptops/desktops, 2150px and to 3900px) */
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1440px) {
+@media only screen and (min-width: 2150px) and (max-width: 3900px) {
+  .heading1 h1 {
+    font-size: 7.375rem;
+  }
+
+  header h1 {
+    font-size: 7.375rem;
+  }
+
+  .heading1 em {
+    font-size: 6.125rem;
+  }
+
+  #playGame {
+    /* display: inline-block; */
+    font-size: 2rem;
+    padding: 40px 110px;
+  }
+
   .col-6 h1 {
     font-size: 5rem;
   }
@@ -290,5 +327,9 @@ footer {
 
   section {
     font-size: 3rem;
+  }
+
+  .text-col {
+    padding: 0% 3% 0% 3% !important;
   }
 }
