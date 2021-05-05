@@ -181,24 +181,7 @@ $(document).ready(function() {
             }
         });
 
-        var congraulationsModal = new tingle.modal({
-            footer: false,
-            stickyFooter: false,
-            closeMethods: ['overlay', 'button', 'escape'],
-            closeLabel: "Close",        
-            onOpen: function() {
-                console.log('modal open');
-            },
-            onClose: function() {
-                console.log('modal closed');
-            },
-            beforeClose: function() {
-                // here's goes some logic
-                // e.g. save content before closing the modal
-                return true; // close the modal
-                return false; // nothing happens
-            }
-        });
+    
         
         // Bootstrap Modal
         // https://stackoverflow.com/questions/13183630/how-to-open-a-bootstrap-modal-window-using-jquery
@@ -217,13 +200,10 @@ $(document).ready(function() {
             
                 // Returns true if  
                 console.log("The user has won the game");
-                // location.replace("../level2.html");
+                // Go to the winner page
+                location.replace("winner.html");    
 
-                congraulationsModal.setContent('<div class ="row"> <p> Congratulations, The user has won the game </p></div>>');
-
-                // open modal
-                congraulationsModal.open();
-                console.log("Here");
+                $('.win-content').append(interval);
 
             }
             else {

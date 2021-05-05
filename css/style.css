@@ -34,6 +34,15 @@ header {
   padding-top: 35vh;
 }
 
+#topWin {
+  height: 100vh;
+  background-color: lightblue;
+  color: #081c15;
+
+  text-align: center;
+  padding-top: 35vh;
+}
+
 /* Scroll Lock */
 .hidden {
   overflow: hidden;
