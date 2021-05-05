@@ -1,20 +1,25 @@
+// By Jehru Harris 28/04/2001
 
+// When document dom is ready
 $(document).ready(function() {
 
     console.log("Starting");
 
-    // Frog API
+    //  Makes the board unable to be scrolled out of 
+    $('#playGame').on("click", function() {
+        $("body").toggleClass("hidden");   
+    });
+
+
+    // The main frog API
     defaultUrl = "https://bie.ala.org.au/ws/search.json?q=frog&pageSize=6";    
 
     $.getJSON(defaultUrl, function(data){
         
+        // Create a constant to make reaching the data simplier
         const defaultFrog = data.searchResults.results;
-        console.log(defaultFrog);
 
-        // Q mark source
-        // https://friconix.com/icon/fi-snsuxl-question-mark/ 
-        // https://api.jquery.com/data/ 
-
+        // For each item item in the API create two card items that are appened to the page. Using the same information
         for(let i = 0; i < defaultFrog.length; i++) {
             $('.memoryGame').append('<div class="memoryCard" data-framework="' + defaultFrog[i].id +
              '"><img class="frontFace" src="' + defaultFrog[i].imageUrl + '" alt="Image of '+ defaultFrog[i].name + '">' +
@@ -26,54 +31,59 @@ $(document).ready(function() {
   
         }
 
-        // Memory Flip Script
+        // Run the shuffle function
         shuffle();
 
+        // Create some variables that will be used later to lock the game board, check if a card has been flipped. 
         let hasFlippedCard = false;
         let lockBoard = false;
         let firstCard, secondCard;
 
+        // When a memory card is clicked check if the board is locked or if it equals the firstcard
         $('.memoryCard').on('click', function() {    
             if (lockBoard) return;
             if (this === firstCard) return;
         
+            // Create a class on the card called 'flip'
             $(this).toggleClass('flip');   
 
+            // If the card is the first one clicked, no other flipped cards. 
             if (!hasFlippedCard) {
-                // First Click
+                // Change flipped card to be true, as one card is flipped and make the firstcard item the clicked card
                 hasFlippedCard = true;
                 firstCard = this;
             } else {
-                // Second click
+                // Otherwise, this is the second flipped card 
+                // Turn the has flipped card to false to reset as either there is match on the board or the cards are wrong 
+                // Make the second card item the clicked card similar to the above
                 hasFlippedCard = false;
                 secondCard = this;
 
+                // Function to check if the cards match 
+                // This only happens when the second card is flipped
                 doCardsMatch();
-                
-
             }
         });
 
 
-        // Random Order 
+        // Shuffles the cards randomly
         // https://stackoverflow.com/questions/39581109/different-random-number-in-each-div
-
         function shuffle() {
 
+            // For each card item add to the css an order property with a random value
             $(".memoryCard").each(function(){
-                $(this).css("order", createRandom());
+                $(this).css("order", createRandomNumber());
             })
 
-            // Had an issue where the number for each order item would be the same, this is because the random number applied 
-            // to the whole memoryCard items
-            // To solve this invoking a function each time solved the problem with a random number
-            function createRandom() {
-                var Num = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
-                return Num;
+            // Create random number function 
+            function createRandomNumber() {
+                var number = Math.floor((Math.random() * (75 - 15) + 1) + 15 );
+                return number;
             }  
         }
 
         function doCardsMatch() {
+            // Function which starts the move counter 
             moveCounter();
 
             // Do Cards Match
@@ -109,22 +119,29 @@ $(document).ready(function() {
             secondCard = null;
         }
         
-        // Move Counter
+
+        // Begin with a move counter of 0 moves
         let moves = 0;
 
         // Counts the Players moves
         function moveCounter(){
             moves++;
-            $('.moves').html(moves + " Move(s)");
             if(moves == 1){
                 second = 0;
                 minute = 0; 
                 startTimer();
             }
+            // If moves are less than or equal to one then display one 'move'
+            // Otherwise change it to 'moves'
+            if (moves <= 1) {
+                $('.moves').html(moves + " Move")
+            }else {
+                $('.moves').html(moves + " Moves")
+
+            }
         }
 
         // Game Timer
-        // Hour not neccessary??
         let second = 0; 
         let minute = 0;
         var interval;
@@ -148,13 +165,32 @@ $(document).ready(function() {
             stickyFooter: false,
             closeMethods: ['overlay', 'button', 'escape'],
             closeLabel: "Close",
-            // cssClass: ['custom-class-1', 'custom-class-2'],
+            cssClass: ['scrollClass'],
             onOpen: function() {
                 console.log('modal open');
             },
             onClose: function() {
                 console.log('modal closed');
                 checkIfGameWon();
+            },
+            beforeClose: function() {
+                // here's goes some logic
+                // e.g. save content before closing the modal
+                return true; // close the modal
+                return false; // nothing happens
+            }
+        });
+
+        var congraulationsModal = new tingle.modal({
+            footer: false,
+            stickyFooter: false,
+            closeMethods: ['overlay', 'button', 'escape'],
+            closeLabel: "Close",        
+            onOpen: function() {
+                console.log('modal open');
+            },
+            onClose: function() {
+                console.log('modal closed');
             },
             beforeClose: function() {
                 // here's goes some logic
@@ -179,11 +215,15 @@ $(document).ready(function() {
 
             if($('.memoryGame .memoryCard.flip').length === $('.memoryGame .memoryCard').length){
             
-            // Returns true if  
-            console.log("The user has won the game");
-            // location.replace("../level2.html");
+                // Returns true if  
+                console.log("The user has won the game");
+                // location.replace("../level2.html");
 
-            window.alert("You have won the game");
+                congraulationsModal.setContent('<div class ="row"> <p> Congratulations, The user has won the game </p></div>>');
+
+                // open modal
+                congraulationsModal.open();
+                console.log("Here");
 
             }
             else {
@@ -205,7 +245,7 @@ $(document).ready(function() {
 
                     // Check which frog Id matches up with the various frogs on the board
                     if (cardDataId === defaultFrogId) {
-                        // console.log(defaultFrog[i]);
+                        console.log(defaultFrog[i]);
 
                         let idName = "";
 
@@ -220,13 +260,13 @@ $(document).ready(function() {
                         }
 
                         eolUrl = "https://eol.org/api/search/1.0.json?q=" + idName + "&page=1&key=";
-                        // console.log(eolUrl);
+                        console.log(eolUrl);
 
                         $.getJSON(eolUrl, function(eolData){
-                            console.log(eolData);
+                            // console.log(eolData);
                             
                             let eolDataId = eolData.results[0].id;
-                            // console.log(eolDataId);
+                            console.log(eolDataId);
                 
                             let summaryUrl = "https://eol.org/api/pages/"+ eolDataId +"/brief_summary.json";
                 
@@ -244,14 +284,14 @@ $(document).ready(function() {
                                         let audioSource = "https://amphibiaweb.org/sounds/" + linkId + ".wav"; 
 
                                         modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
-                                        ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div> ' +
+                                        ' <div class="col-6 text-col"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div> ' +
                                         '<div class="row"><audio controls src="' + audioSource + '"></audio><div>');
                                        
                                     } else {
                                         console.log("Does not have an linkIdentifier so no audio can be found");
 
                                         modal.setContent('<div class ="row"> <div class="col-6"> <img src="' + defaultFrog[i].smallImageUrl + '"> </div> ' +
-                                        ' <div class="col-6"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
+                                        ' <div class="col-6 text-col"> <h1>You found a ' + defaultFrog[i].name + '</h1> <p>'+ summaryInfo +'</p> </div> </div>');
                                     }
                                                                 
                                 
@@ -265,14 +305,14 @@ $(document).ready(function() {
                                 
                         });
                     } else {
-
+                        
                     }
                 }
             });
         } 
 
         //Ends here 
-
+    
 
     });
 });
