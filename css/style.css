@@ -196,43 +196,49 @@ footer a:hover {
     font-size: 3.375rem;
   }
 
+  /* Makes the padding smaller on the "Play Frog Memory" button */
   #playGame {
     padding: 20px 35px;
     margin: 0px;
   }
 
+  /* Makes the game board smaller */
   .memoryGame {
     width: 45vh;
     height: 45vh;
     margin: 20vh auto;
   }
 
+  /* Changes game into 3 columns wide 4 cards high */
   .memoryCard {
     width: calc(33.333% - 5%);
     height: calc(33.333% - 5%);
     margin: 2.5%;
   }
 
+  /* Column 6 is for the dual screen modal popup */
+  /* Makes the content appear on top of each other rather than side by side */
+  /* Necessary to add on smaller screens */
   .col-6 {
     width: 100% !important;
   }
 
-  /* .col-8 {
-    width: 100% !important;
-  } */
-
+  /* Makes the image full width and adds some white space to the bottom */
   .col-6 img {
     width: 100%;
     margin: 0 auto 5% auto;
   }
 
+  /* Removes grey padding on the cards */
   .frontFace,
   .backFace {
     padding: 0px;
   }
 
+  /* Adds overflow auto to the modal */
+  /* This will add the scroll bar if the content goes over screen width */
   .scrollClass {
-    overflow: scroll;
+    overflow: auto;
   }
 }
 
@@ -246,26 +252,26 @@ footer a:hover {
     font-size: 3.375rem;
   }
 
+  /* Makes the padding smaller on the "Play Frog Memory" button */
   #playGame {
     padding: 20px 35px;
   }
 
+  /* Makes the game board smaller */
   .memoryGame {
     width: 45vh;
     height: 45vh;
     margin: 20vh auto;
   }
 
+  /* Changes game into 3 columns wide 4 cards high */
   .memoryCard {
     width: calc(33.333% - 5%);
     height: calc(33.333% - 5%);
     margin: 2.5%;
   }
 
-  .col-8 img {
-    width: 100%;
-    margin: 0 auto 5% auto;
-  }
+  /* Make the padding smaller */
   .frontFace,
   .backFace {
     padding: 8px;
@@ -274,14 +280,14 @@ footer a:hover {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+  /* Makes the game board smaller */
   .memoryGame {
-    /* CHECK THESE VALUES */
     width: 74vh;
-    /* width: 64vh; */
     height: 58vh;
-    /* height: 51vh; */
     margin: auto;
   }
+
+  /* Adjustments to font sizes  */
   p {
     font-size: 1rem;
   }
@@ -291,13 +297,14 @@ footer a:hover {
   }
 }
 
+/* This media query was found to not be neccessary as the site was designed intially for these sizes */
 /* Medium devices (landscape tablets, 993px and 1200px) */
 /* @media only screen and (min-width: 993px) and (max-width: 1200px) {
 } */
 
-/* Large devices (laptops/desktops, 2150px and to 3900px) */
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 2150px) and (max-width: 3900px) {
+/* Very Large devices (laptops/desktops, 2150px and to 3000px) */
+/* For large 4k touch screen */
+@media only screen and (min-width: 2150px) and (max-width: 3000px) {
   .heading1 h1 {
     font-size: 7.375rem;
   }
@@ -310,16 +317,18 @@ footer a:hover {
     font-size: 6.125rem;
   }
 
+  /* Changing styling for the "Play Memory Game button" */
   #playGame {
-    /* display: inline-block; */
     font-size: 2rem;
     padding: 40px 110px;
   }
 
+  /* Modal heading size */
   .col-6 h1 {
     font-size: 5rem;
   }
 
+  /* Adjustments to font sizes */
   p {
     font-size: 3rem;
   }
@@ -328,6 +337,7 @@ footer a:hover {
     font-size: 3rem;
   }
 
+  /* Adds a small margin to the top and bottom of the body text on the modal */
   .text-col {
     padding: 0% 3% 0% 3% !important;
   }

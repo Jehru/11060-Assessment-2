@@ -316,18 +316,6 @@ $(document).ready(function() {
 });
 
 
-// Problems I had:
-/* 
-- Memory Game shuffle creating a random order when your appending each item at once
-- Unbinding the click class 
-- I had to append the items to the page compared to them already being there.
-- Finding an appropriate Modal I could use
-- Using bootstrap to better design the Modal popup left and right
-- Triggering the modal when two cards were selected
-
-- Making the Api read the selected cards and match it against all the API items
-
-*/
     
 
 // OLD API Script
