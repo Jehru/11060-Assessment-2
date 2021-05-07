@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     } else {
         // Otherwise log an error
-        console.log("Local storage not supported.");
+        console.log("Local storage not supported on your web browser");
     }
 
 });
