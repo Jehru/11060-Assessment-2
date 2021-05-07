@@ -1,23 +1,14 @@
 /* Styles for 11060 Interactive Project */
 /* By Jehru */
 
-/* Poppins font sourcing */
+/* Poppins font URL source */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap");
-
-/* Colour scheme
-https://coolors.co/d8f3dc-298561-095d42-081c15-df5979 
-
-    #d8f3dc
-    #298561
-    #095D42
-    #081C15
-    #df5979
-*/
 
 /* ******************** */
 /* Main Styles */
 /* ******************** */
 
+/* Reset the styling and give make Poppins the default */
 * {
   padding: 0;
   margin: 0;
@@ -25,55 +16,48 @@ https://coolors.co/d8f3dc-298561-095d42-081c15-df5979
   font-family: "Poppins", sans-serif;
 }
 
+/* Intro section of the game */
 header {
   height: 100vh;
   background-color: #d8f3dc;
   color: #081c15;
-
   text-align: center;
   padding-top: 35vh;
 }
 
+/* Winner page styling, has different background colours */
 #topWin {
   height: 100vh;
   background-color: lightblue;
   color: #081c15;
-
   text-align: center;
   padding-top: 35vh;
 }
 
-/* Scroll Lock */
+/* Overflow hidden used to lock the game board */
 .hidden {
   overflow: hidden;
 }
 
-/* .secretHeader {
-  height: 100vh;
-  background-color: #61ece1;
-  color: #081c15;
-
-  text-align: center;
-  padding-top: 35vh;
-} */
-
+/* "Frogs of" heading styling  */
 header h1 {
   font-size: 4.375rem;
   font-weight: 700;
 }
 
-/* For the Modal Popup */
+/* Modal header styling */
 .col-6 h1 {
-  /* font-size: 4.375rem; */
   font-weight: 700;
   margin-bottom: 30px;
 }
 
+/* "Australia" styling */
 .heading1 h1 {
   letter-spacing: 4px;
   display: inline;
 }
 
+/* "of" emphasis text */
 .heading1 em {
   font-size: 3.125rem;
   font-weight: 700;
@@ -81,22 +65,13 @@ header h1 {
   font-family: "Poppins";
 }
 
-/* h3 {
-    font-weight: 700;
-    font-size: 20px; 
-} */
-
+/* Sets the main styling, game board to full width and center the control elements */
 main {
   height: 100vh;
-  /* display: flex; */
   background-color: #ffffff;
   align-items: center;
   justify-content: center;
 }
-
-/* .mainContainer {
-  align-items: 
-} */
 
 footer {
   background-color: #095d42;
@@ -113,42 +88,51 @@ footer a:hover {
   color: #dbdcdf;
 }
 
-/* **********  */
+/* ********************  */
 /* Memory Game */
-/* **********  */
+/* ********************  */
 
+/* Adds a margin to the board game controls and aligns to them to center */
+.controls {
+  margin-top: 10vh;
+  text-align: center;
+}
+
+/* Sets the board to full width and height */
 .memoryGame {
   width: 90vh;
   height: 70vh;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-
-  /* Dont know if neccessary */
+  /* Makes the cards look like they are physically turning over */
   perspective: 1000px;
 }
 
+/* Individual memory card styling, sets four rows of three */
 .memoryCard {
   width: calc(25% - 5%);
   height: calc(33.333% - 5%);
   margin: 2.5%;
   position: relative;
   transform: scale(1);
-
-  /* Dont know if necc */
+  /* Makes the cards look like they are physically turning over */
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }
 
+/* Makes the clicked look physically depressed when clicked*/
 .memoryCard:active {
   transform: scale(0.97);
   transition: transform 0.2s;
 }
 
+/* Shows the opposite side of the card*/
 .memoryCard.flip {
   transform: rotateY(180deg);
 }
 
+/* Main styling for front and back of cards */
 .frontFace,
 .backFace {
   width: 100%;
@@ -164,10 +148,7 @@ footer a:hover {
   transform: rotateY(180deg);
 }
 
-.tingle-modal-box img {
-  width: 100%;
-}
-
+/* Sets the "Play Memory Game" link button styling */
 #playGame {
   text-decoration: none;
   letter-spacing: 2px;
@@ -183,6 +164,7 @@ footer a:hover {
   display: inline-block;
 }
 
+/* Hover Effect for above button */
 #playGame:hover {
   background-color: #095d42;
   -webkit-transition: all 0.4s;
@@ -190,19 +172,19 @@ footer a:hover {
   transition: all 0.4s;
 }
 
+/* Changes the default img size to full width */
+.tingle-modal-box img {
+  width: 100%;
+}
+
+/* Adds slight margin to the audio file controls in the Modal */
 .row audio {
   margin-top: 5%;
 }
 
-.controls {
-  /* align-items: center; */
-  margin-top: 10vh;
-  text-align: center;
-}
-
-/* ------------------------------------ */
+/* ******************** */
 /* MEDIA QUERIES */
-/* ------------------------------------ */
+/* ******************** */
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
