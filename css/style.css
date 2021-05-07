@@ -105,6 +105,14 @@ footer {
   color: #ffffff;
 }
 
+footer a {
+  color: #ffffff;
+}
+
+footer a:hover {
+  color: #dbdcdf;
+}
+
 /* **********  */
 /* Memory Game */
 /* **********  */

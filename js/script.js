@@ -10,6 +10,10 @@ $(document).ready(function() {
         $("body").toggleClass("hidden");   
     });
 
+    $('.reload').on("click", function() {
+        $("body").removeClass("hidden");   
+    });
+
 
     // The main frog API
     defaultUrl = "https://bie.ala.org.au/ws/search.json?q=frog&pageSize=6";    
@@ -200,10 +204,24 @@ $(document).ready(function() {
             
                 // Returns true if  
                 console.log("The user has won the game");
+
+                if(typeof(Storage)!=="undefined"){
+                    // localStorage.lastmoves = moves;
+                    // console.log(moves);
+                    // console.log(minute);
+                    // console.log(second);
+                    sessionStorage.setItem("lastmoves", moves);
+                    sessionStorage.setItem("lastmin", minute);
+                    sessionStorage.setItem("lastsec", second);
+
+                    location.replace("winner.html");    
+                } else{
+                    console.log("Sorry, your browser does not support web storage...");
+
+                }
+
                 // Go to the winner page
                 location.replace("winner.html");    
-
-                $('.win-content').append(interval);
 
             }
             else {
