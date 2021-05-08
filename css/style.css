@@ -73,6 +73,14 @@ main {
   justify-content: center;
 }
 
+.reload button {
+  background-color: #095d42;
+  color: #ffffff;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 7px;
+}
+
 footer {
   background-color: #095d42;
   padding: 50px;
@@ -206,7 +214,7 @@ footer a:hover {
   .memoryGame {
     width: 45vh;
     height: 45vh;
-    margin: 20vh auto;
+    margin: 10vh auto;
   }
 
   /* Changes game into 3 columns wide 4 cards high */
@@ -302,9 +310,9 @@ footer a:hover {
 /* @media only screen and (min-width: 993px) and (max-width: 1200px) {
 } */
 
-/* Very Large devices (laptops/desktops, 2150px and to 3000px) */
+/* Very Large devices (laptops/desktops, 2150px and to 3900px) */
 /* For large 4k touch screen */
-@media only screen and (min-width: 2150px) and (max-width: 3000px) {
+@media only screen and (min-width: 2150px) and (max-width: 3900px) {
   .heading1 h1 {
     font-size: 7.375rem;
   }
@@ -340,5 +348,9 @@ footer a:hover {
   /* Adds a small margin to the top and bottom of the body text on the modal */
   .text-col {
     padding: 0% 3% 0% 3% !important;
+  }
+
+  #topWin {
+    font-size: 4.375rem;
   }
 }
