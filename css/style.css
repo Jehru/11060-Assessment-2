@@ -1,23 +1,14 @@
 /* Styles for 11060 Interactive Project */
 /* By Jehru */
 
-/* Poppins font sourcing */
+/* Poppins font URL source */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap");
-
-/* Colour scheme
-https://coolors.co/d8f3dc-298561-095d42-081c15-df5979 
-
-    #d8f3dc
-    #298561
-    #095D42
-    #081C15
-    #df5979
-*/
 
 /* ******************** */
 /* Main Styles */
 /* ******************** */
 
+/* Reset the styling and give make Poppins the default */
 * {
   padding: 0;
   margin: 0;
@@ -25,46 +16,48 @@ https://coolors.co/d8f3dc-298561-095d42-081c15-df5979
   font-family: "Poppins", sans-serif;
 }
 
+/* Intro section of the game */
 header {
   height: 100vh;
   background-color: #d8f3dc;
   color: #081c15;
-
   text-align: center;
   padding-top: 35vh;
 }
 
-/* Scroll Lock */
+/* Winner page styling, has different background colours */
+#topWin {
+  height: 100vh;
+  background-color: lightblue;
+  color: #081c15;
+  text-align: center;
+  padding-top: 35vh;
+}
+
+/* Overflow hidden used to lock the game board */
 .hidden {
   overflow: hidden;
 }
 
-/* .secretHeader {
-  height: 100vh;
-  background-color: #61ece1;
-  color: #081c15;
-
-  text-align: center;
-  padding-top: 35vh;
-} */
-
+/* "Frogs of" heading styling  */
 header h1 {
   font-size: 4.375rem;
   font-weight: 700;
 }
 
-/* For the Modal Popup */
+/* Modal header styling */
 .col-6 h1 {
-  /* font-size: 4.375rem; */
   font-weight: 700;
   margin-bottom: 30px;
 }
 
+/* "Australia" styling */
 .heading1 h1 {
   letter-spacing: 4px;
   display: inline;
 }
 
+/* "of" emphasis text */
 .heading1 em {
   font-size: 3.125rem;
   font-weight: 700;
@@ -72,22 +65,13 @@ header h1 {
   font-family: "Poppins";
 }
 
-/* h3 {
-    font-weight: 700;
-    font-size: 20px; 
-} */
-
+/* Sets the main styling, game board to full width and center the control elements */
 main {
   height: 100vh;
-  /* display: flex; */
   background-color: #ffffff;
   align-items: center;
   justify-content: center;
 }
-
-/* .mainContainer {
-  align-items: 
-} */
 
 footer {
   background-color: #095d42;
@@ -96,42 +80,59 @@ footer {
   color: #ffffff;
 }
 
-/* **********  */
-/* Memory Game */
-/* **********  */
+footer a {
+  color: #ffffff;
+}
 
+footer a:hover {
+  color: #dbdcdf;
+}
+
+/* ********************  */
+/* Memory Game */
+/* ********************  */
+
+/* Adds a margin to the board game controls and aligns to them to center */
+.controls {
+  margin-top: 10vh;
+  text-align: center;
+}
+
+/* Sets the board to full width and height */
 .memoryGame {
   width: 90vh;
   height: 70vh;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-
-  /* Dont know if neccessary */
+  /* Makes the cards look like they are physically turning over */
   perspective: 1000px;
 }
 
+/* Individual memory card styling, sets four rows of three */
 .memoryCard {
   width: calc(25% - 5%);
   height: calc(33.333% - 5%);
   margin: 2.5%;
   position: relative;
   transform: scale(1);
-
-  /* Dont know if necc */
+  /* Makes the cards look like they are physically turning over */
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }
 
+/* Makes the clicked look physically depressed when clicked*/
 .memoryCard:active {
   transform: scale(0.97);
   transition: transform 0.2s;
 }
 
+/* Shows the opposite side of the card*/
 .memoryCard.flip {
   transform: rotateY(180deg);
 }
 
+/* Main styling for front and back of cards */
 .frontFace,
 .backFace {
   width: 100%;
@@ -147,10 +148,7 @@ footer {
   transform: rotateY(180deg);
 }
 
-.tingle-modal-box img {
-  width: 100%;
-}
-
+/* Sets the "Play Memory Game" link button styling */
 #playGame {
   text-decoration: none;
   letter-spacing: 2px;
@@ -166,6 +164,7 @@ footer {
   display: inline-block;
 }
 
+/* Hover Effect for above button */
 #playGame:hover {
   background-color: #095d42;
   -webkit-transition: all 0.4s;
@@ -173,19 +172,19 @@ footer {
   transition: all 0.4s;
 }
 
+/* Changes the default img size to full width */
+.tingle-modal-box img {
+  width: 100%;
+}
+
+/* Adds slight margin to the audio file controls in the Modal */
 .row audio {
   margin-top: 5%;
 }
 
-.controls {
-  /* align-items: center; */
-  margin-top: 10vh;
-  text-align: center;
-}
-
-/* ------------------------------------ */
+/* ******************** */
 /* MEDIA QUERIES */
-/* ------------------------------------ */
+/* ******************** */
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -197,43 +196,49 @@ footer {
     font-size: 3.375rem;
   }
 
+  /* Makes the padding smaller on the "Play Frog Memory" button */
   #playGame {
     padding: 20px 35px;
     margin: 0px;
   }
 
+  /* Makes the game board smaller */
   .memoryGame {
     width: 45vh;
     height: 45vh;
     margin: 20vh auto;
   }
 
+  /* Changes game into 3 columns wide 4 cards high */
   .memoryCard {
     width: calc(33.333% - 5%);
     height: calc(33.333% - 5%);
     margin: 2.5%;
   }
 
+  /* Column 6 is for the dual screen modal popup */
+  /* Makes the content appear on top of each other rather than side by side */
+  /* Necessary to add on smaller screens */
   .col-6 {
     width: 100% !important;
   }
 
-  /* .col-8 {
-    width: 100% !important;
-  } */
-
+  /* Makes the image full width and adds some white space to the bottom */
   .col-6 img {
     width: 100%;
     margin: 0 auto 5% auto;
   }
 
+  /* Removes grey padding on the cards */
   .frontFace,
   .backFace {
     padding: 0px;
   }
 
+  /* Adds overflow auto to the modal */
+  /* This will add the scroll bar if the content goes over screen width */
   .scrollClass {
-    overflow: scroll;
+    overflow: auto;
   }
 }
 
@@ -247,26 +252,26 @@ footer {
     font-size: 3.375rem;
   }
 
+  /* Makes the padding smaller on the "Play Frog Memory" button */
   #playGame {
     padding: 20px 35px;
   }
 
+  /* Makes the game board smaller */
   .memoryGame {
     width: 45vh;
     height: 45vh;
     margin: 20vh auto;
   }
 
+  /* Changes game into 3 columns wide 4 cards high */
   .memoryCard {
     width: calc(33.333% - 5%);
     height: calc(33.333% - 5%);
     margin: 2.5%;
   }
 
-  .col-8 img {
-    width: 100%;
-    margin: 0 auto 5% auto;
-  }
+  /* Make the padding smaller */
   .frontFace,
   .backFace {
     padding: 8px;
@@ -275,14 +280,14 @@ footer {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+  /* Makes the game board smaller */
   .memoryGame {
-    /* CHECK THESE VALUES */
     width: 74vh;
-    /* width: 64vh; */
     height: 58vh;
-    /* height: 51vh; */
     margin: auto;
   }
+
+  /* Adjustments to font sizes  */
   p {
     font-size: 1rem;
   }
@@ -292,13 +297,14 @@ footer {
   }
 }
 
+/* This media query was found to not be neccessary as the site was designed intially for these sizes */
 /* Medium devices (landscape tablets, 993px and 1200px) */
 /* @media only screen and (min-width: 993px) and (max-width: 1200px) {
 } */
 
-/* Large devices (laptops/desktops, 2150px and to 3900px) */
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 2150px) and (max-width: 3900px) {
+/* Very Large devices (laptops/desktops, 2150px and to 3000px) */
+/* For large 4k touch screen */
+@media only screen and (min-width: 2150px) and (max-width: 3000px) {
   .heading1 h1 {
     font-size: 7.375rem;
   }
@@ -311,16 +317,18 @@ footer {
     font-size: 6.125rem;
   }
 
+  /* Changing styling for the "Play Memory Game button" */
   #playGame {
-    /* display: inline-block; */
     font-size: 2rem;
     padding: 40px 110px;
   }
 
+  /* Modal heading size */
   .col-6 h1 {
     font-size: 5rem;
   }
 
+  /* Adjustments to font sizes */
   p {
     font-size: 3rem;
   }
@@ -329,6 +337,7 @@ footer {
     font-size: 3rem;
   }
 
+  /* Adds a small margin to the top and bottom of the body text on the modal */
   .text-col {
     padding: 0% 3% 0% 3% !important;
   }
